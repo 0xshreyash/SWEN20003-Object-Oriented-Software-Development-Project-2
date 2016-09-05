@@ -1,9 +1,9 @@
-/* 433-294 Object Oriented Software Development
+/* 433-294 Object Oriented Software Development 
  * RPG Game Engine
  * Author: Matt Giuca <mgiuca>
  */
 
-import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.AppGameContainer; 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Graphics;
@@ -11,38 +11,37 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 /** Main class for the Role-Playing Game engine.
- * Handles initialisation, input and rendering.
+ * Handles initialization, input and rendering.
  */
 public class RPG extends BasicGame
 {
     
-    
-    /* Things that will be common to all instance of the game */
-    
+	/**************** Attributes *********************/
+	
+    /* Things that will be common to all instance of the game. */
+   
     /** Screen width, in pixels. */
     public static final int screenwidth = 800;
     
     /** Screen height, in pixels. */
     public static final int screenheight = 600;
     
-    /** Path to assets folder */
+    /** Path to assets folder. */
     public static final String ASSETS = "/assets/";
     
-    /** Path to image of player from inside the assets folder */
+    /** Path to image of player from inside the assets folder. */
     public static final String PLAYER_IMG = "/assets/units/player.png";
     
-    /** Path to image of tiles from inside the assets folder */
-    public static final String TILES_IMG = "assets/tiles.png"; 
+    /** Path to image of tiles from inside the assets folder. */
+    public static final String TILES_IMG = "/assets/tiles.png"; 
     
-    /** Path to map.tmx from inside the assets folder */
-    public static final String MAP = "assets/map.tmx";
+    /** Path to map.tmx from inside the assets folder. */
+    public static final String MAP = "/assets/map.tmx";
     
-    /* Other attributes */
-    
+    /* Other attributes. */
     private World world;
     
-    
-    /* Functions we need to create our RPG Game */
+    /***************** Methods ***********************/
     
     /** Create a new RPG object. */
     public RPG()
@@ -50,8 +49,9 @@ public class RPG extends BasicGame
         super("RPG Game Engine");
     }
 
-    /** Initialise the game state.
+    /** Initialize the game state.
      * @param gc The Slick game container object.
+     * @return void.
      */
     @Override
     public void init(GameContainer gc)
@@ -63,6 +63,7 @@ public class RPG extends BasicGame
     /** Update the game state for a frame.
      * @param gc The Slick game container object.
      * @param delta Time passed since last frame (milliseconds).
+     * @return void. 
      */
     @Override
     public void update(GameContainer gc, int delta)
@@ -90,6 +91,7 @@ public class RPG extends BasicGame
     /** Render the entire screen, so it reflects the current game state.
      * @param gc The Slick game container object.
      * @param g The Slick graphics object, used for drawing.
+     * @return void.
      */
     public void render(GameContainer gc, Graphics g)
     throws SlickException
@@ -100,6 +102,7 @@ public class RPG extends BasicGame
 
     /** Start-up method. Creates the game and runs it.
      * @param args Command-line arguments (ignored).
+     * @return void.
      */
     public static void main(String[] args)
     throws SlickException
