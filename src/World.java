@@ -63,6 +63,7 @@ public class World
     throws SlickException
     {
     	/* Finding screen width and height in tiles. */
+    	/* + 2 because we want one extra tile on each side of the screen */
     	int screen_width = (int)(RPG.screenwidth/map.getTileWidth() + 2);
     	int screen_height = (int)(RPG.screenheight/map.getTileWidth() + 2);
     	
