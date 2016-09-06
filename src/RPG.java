@@ -26,6 +26,19 @@ public class RPG extends BasicGame
     /** Screen height, in pixels. */
     public static final int screenheight = 600;
     
+    /** Game width, in pixels. */
+    public static final int gamewidth = 6912;
+    
+    /** Game height, in pixels. */
+    public static final int gameheight = 6912;
+    
+    /** Minimum coordinates on the map. */
+    /** Min x coordinate on the map. */
+    public static final int min_X = 0; 
+    
+    /** Min y coordinate on the map. */
+    public static final int min_Y = 0;
+    
     /** Path to assets folder. */
     public static final String ASSETS = "/assets/";
     

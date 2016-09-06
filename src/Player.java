@@ -28,7 +28,7 @@ public class Player
 	private static final double starting_Y = 684; 
 	
 	/** Speed of the player. */
-	private static final double SPEED = 0.25;
+	private static final double SPEED = 2.25;
 	
 	/** Current coordinates of the player.*/
 	/** Starting x-coordinates of the player. */
@@ -96,18 +96,38 @@ public class Player
 		/* Only update the yPos if the xPos caused the blocking. */ 
 		if(world.blocks(new_xPos, new_yPos) && !world.blocks(this.xPos, new_yPos))
 		{
-			this.yPos = new_yPos;  
+			/* Making sure the new y-position is on the game board. */
+			if(!((int)Math.floor(new_yPos) <= RPG.min_Y
+			 || (int)Math.ceil(new_yPos) >= RPG.gameheight))
+			{
+				this.yPos = new_yPos; 
+			}	 
 		}
 		/* Update the xPos if the yPos is causing the blocking. */
 		else if(world.blocks(new_xPos, new_yPos) && !world.blocks(new_xPos, this.yPos))
 		{
-			this.xPos = new_xPos; 
+			/* Making sure the new x-position is on the game board. */
+			if(!((int)Math.floor(new_xPos) <= RPG.min_X
+			 || (int)Math.ceil(new_xPos) >= RPG.gamewidth))
+			{
+				this.xPos = new_xPos; 
+			}
 		}
 		/* Update both if none of the xPos and yPos cause blocking. */
 		else if(!world.blocks(new_xPos, new_yPos))
 		{
-			this.xPos = new_xPos;
-			this.yPos = new_yPos; 
+			/* Making sure the new x-position is on the game board. */
+			if(!((int)Math.floor(new_xPos) <= RPG.min_X
+			 || (int)Math.ceil(new_xPos) >= RPG.gamewidth))
+			{
+				this.xPos = new_xPos; 
+			}
+			/* Making sure the new y-position is on the game board. */
+			if(!((int)Math.floor(new_yPos) <= RPG.min_Y
+			 || (int)Math.ceil(new_yPos) >= RPG.gameheight))
+			{
+				this.yPos = new_yPos; 
+			}	
 		}
 		
 		/* Check which side the player is facing. */

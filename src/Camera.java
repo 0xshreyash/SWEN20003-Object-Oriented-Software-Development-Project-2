@@ -75,9 +75,22 @@ public class Camera
     public void update()
     throws SlickException
     {
-    	/* Change coordinates of the camera. */
-        this.xPos = unitFollow.getxPos(); 
-        this.yPos = unitFollow.getyPos();
+	    	/* Change coordinates of the camera. */
+	    	
+	    	/* Do not move the camera if we are approaching the end of the
+	    	 * game map as there is no more map to render and display. 
+	    	 */
+        if((int)Math.ceil(unitFollow.getxPos() + RPG.screenwidth/2) < RPG.gamewidth
+        && (int)Math.floor(unitFollow.getxPos() - RPG.screenwidth/2) > RPG.min_X)
+        {
+        		this.xPos = unitFollow.getxPos(); 
+        }
+        
+        if((int)Math.ceil(unitFollow.getyPos() + RPG.screenheight/2) < RPG.gameheight
+        && (int)Math.floor(unitFollow.getyPos() - RPG.screenheight/2) > RPG.min_Y)
+        {
+        		this.yPos = unitFollow.getyPos();
+        }
         return; 
     }
     
