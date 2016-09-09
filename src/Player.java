@@ -1,7 +1,8 @@
-/* 433-294 Object Oriented Software Development
+/* SWEN20003 Object Oriented Software Development 
  * RPG Game Engine
  * Author: <Shreyassh Patodia> <spatodia>
  * Student Number : 767336
+ * Email: spatodia@student.unimelb.edu.au
  * 
  * This file contains the Player class which controls the player
  * in the program.
@@ -11,13 +12,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-
 public class Player 
 {
 	/**************** Attributes *********************/
 	
 	/** Image of the player. */
 	private Image player_image = null; 
+	
 	/** Inverted image of the player. */
 	private Image player_image_inverted = null;
 	
@@ -28,7 +29,7 @@ public class Player
 	private static final double starting_Y = 684; 
 	
 	/** Speed of the player. */
-	private static final double SPEED = 2.25;
+	private static final double SPEED = 0.25;
 	
 	/** Current coordinates of the player.*/
 	/** Starting x-coordinates of the player. */
@@ -57,8 +58,7 @@ public class Player
 	 */
     public double getyPos() 
     {
-        return this.yPos;
-    	
+        return this.yPos; 	
     }
     
     /** Creates the player object.  
@@ -78,24 +78,26 @@ public class Player
 	}
 	
 	/** Updates the position of the player in order to render it.
-	 * @param world - The world object we use to see if the tile is
+	 * @param map - The Map object we use to see if the tile is
 	 * blocking or not. 
 	 * @param dir_x - the direction of movement in the x-direction.
 	 * @param dir_y - the direction of movement in the y-direction.
 	 * @param delta - the time elapsed since the last update.
 	 * @return - void.
 	 */
-	public void update_position(World world, double dir_x, double dir_y, int delta)
+	public void update_position(Map map, double dir_x, double dir_y, int delta)
 	{
-		
+		/* Prospective x and y-coordinates computed */
 		double new_xPos = this.xPos + dir_x*SPEED * delta; 
 		double new_yPos = this.yPos + dir_y*SPEED * delta; 
 		
-		/* Implement the sliding feature. */
-		
+		/* Check for blocking of the player by certain tiles and 
+		 * halt movement if a certain tile blocks. 
+		 */
 		/* Only update the yPos if the xPos caused the blocking. */ 
-		if(world.blocks(new_xPos, new_yPos) && !world.blocks(this.xPos, new_yPos))
+		if(map.blocks(new_xPos, new_yPos) && !map.blocks(this.xPos, new_yPos))
 		{
+			
 			/* Making sure the new y-position is on the game board. */
 			if(!((int)Math.floor(new_yPos) <= RPG.min_Y
 			 || (int)Math.ceil(new_yPos) >= RPG.gameheight))
@@ -104,8 +106,9 @@ public class Player
 			}	 
 		}
 		/* Update the xPos if the yPos is causing the blocking. */
-		else if(world.blocks(new_xPos, new_yPos) && !world.blocks(new_xPos, this.yPos))
+		else if(map.blocks(new_xPos, new_yPos) && !map.blocks(new_xPos, this.yPos))
 		{
+			
 			/* Making sure the new x-position is on the game board. */
 			if(!((int)Math.floor(new_xPos) <= RPG.min_X
 			 || (int)Math.ceil(new_xPos) >= RPG.gamewidth))
@@ -114,7 +117,7 @@ public class Player
 			}
 		}
 		/* Update both if none of the xPos and yPos cause blocking. */
-		else if(!world.blocks(new_xPos, new_yPos))
+		else if(!map.blocks(new_xPos, new_yPos))
 		{
 			/* Making sure the new x-position is on the game board. */
 			if(!((int)Math.floor(new_xPos) <= RPG.min_X
@@ -128,8 +131,7 @@ public class Player
 			{
 				this.yPos = new_yPos; 
 			}	
-		}
-		
+		}	
 		/* Check which side the player is facing. */
 		if(dir_x > 0)
 		{
@@ -138,9 +140,7 @@ public class Player
 		else if(dir_x < 0)
 		{
 			this.facing_right = false; 
-		}
-			
-			
+		}		
 	}
 	
 	/** Render the player.
@@ -163,10 +163,6 @@ public class Player
 		else
 		{
 			player_image_inverted.drawCentered((float)xPos, (float)yPos);
-		}
-		
+		}		
 	}
-
-
-
 }

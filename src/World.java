@@ -1,14 +1,14 @@
-/* 433-294 Object Oriented Software Development
+/* SWEN20003 Object Oriented Software Development 
  * RPG Game Engine
  * Author: <Shreyash Patodia> <spatodia>
  * Student Number : 767336.
+ * Email: spatodia@student.unimelb.edu.au
  * 
  * This file contains the World class for our game. 
  */
 
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Graphics; 
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
 
 /** Represents the entire game world.
  * (Designed to be instantiated just once for the whole game).
@@ -22,7 +22,7 @@ public class World
 	private Player player = null; 
 	
 	/** The map for our game. */
-	private TiledMap map = null;
+	private Map map = null;
 	
 	/** The camera that follows the player. */
 	private Camera cam = null;
@@ -35,7 +35,7 @@ public class World
     {
     	/* Define the objects in the map. */
     	this.player = new Player(RPG.PLAYER_IMG);
-    	this.map = new TiledMap(RPG.MAP, RPG.ASSETS); 
+    	this.map = new Map(RPG.MAP, RPG.ASSETS); 
     	this.cam = new Camera(player, RPG.screenwidth, RPG.screenheight); 
     }
     
@@ -49,7 +49,7 @@ public class World
     throws SlickException
     {
     	/* Updating our camera and player. */
-        player.update_position(this, dir_x, dir_y, delta);
+        player.update_position(map, dir_x, dir_y, delta);
         cam.update();
        
         return; 
@@ -80,27 +80,7 @@ public class World
     	player.render(g, this.cam);
         
     }
-    /** Checks if the tile corresponding to the given pixels blocks
-     * or not. 
-     * @param player_x - the current x-coordinate of the player.
-     * @param player_y - the current y-coordinate of the player.
-     * @return isBlocking - true if the current tile is block 
-     * else false.
-     */
-    public boolean blocks(double player_x, double player_y)
-    {
-    	/* Finding coordinates of tile which we check blocking for. */
-    	int x_tile = (int)(player_x/map.getTileWidth()); 
-    	int y_tile = (int)(player_y/map.getTileHeight()); 
-    	
-    	/* Check and return if the tile is blocking. */
-    	int tileID = map.getTileId(x_tile, y_tile, 0); 
-    	boolean isBlocking = false;
-    	if(map.getTileProperty(tileID, "block", "0").equals("1"))
-    	{
-    		isBlocking = true; 
-    	}
-    	return isBlocking; 
-    	
-    }
 }
+    
+
+

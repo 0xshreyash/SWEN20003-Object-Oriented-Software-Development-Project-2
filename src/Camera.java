@@ -2,6 +2,7 @@
  * RPG Game Engine
  * Author: <Shreyash Patodia> <spatodia>
  * Student Number : 767336
+ * Email: spatodia@student.unimelb.edu.au
  * 
  * This file contains the camera class which manages the movement of
  * the camera on the screen.
@@ -24,12 +25,17 @@ public class Camera
     /** Screen height, in pixels. */
     public final int screenheight;
     
- 
     /** The camera's position in the world, in x and y coordinates. */
+    
     /** x-coordinate of the camera. in pixels. */
     private double xPos;
     /** y-coordinate of the camera, in pixels. */
     private double yPos;
+    // I went with double for xPos and yPos of the camera 
+    // instead of int because I felt that double offers more 
+    // precision. So all calculations for positions will be 
+    // of type doulbe unless otherwise specified. 
+    
     
     /***************** Methods ***********************/
     
@@ -68,29 +74,42 @@ public class Camera
     }
 
     /** Update the game camera to re-center it's viewpoint
-     * around the player.
+     * around the player (design extended to make sure that
+     * the camera doesn't re-center around the edges of the 
+     * map).
      * @param No parameters.
      * @return void.
      */
     public void update()
     throws SlickException
     {
-	    	/* Change coordinates of the camera. */
-	    	
-	    	/* Do not move the camera if we are approaching the end of the
-	    	 * game map as there is no more map to render and display. 
-	    	 */
-        if((int)Math.ceil(unitFollow.getxPos() + RPG.screenwidth/2) < RPG.gamewidth
-        && (int)Math.floor(unitFollow.getxPos() - RPG.screenwidth/2) > RPG.min_X)
+	     
+		/* gamewidth is the maximum width of the game and the 
+		 * min_X is the minimum x-coordinate of the game i.e. 
+		 * 0.
+		 */
+        if((int)Math.ceil(unitFollow.getxPos() + screenwidth/2) < RPG.gamewidth
+        && (int)Math.floor(unitFollow.getxPos() - screenwidth/2) > RPG.min_X)
         {
-        		this.xPos = unitFollow.getxPos(); 
+    		/* re-center only if the game map has enough tiles
+    		 * to be displayed in the x-direction. 
+    		 */
+        	this.xPos = unitFollow.getxPos(); 
         }
         
-        if((int)Math.ceil(unitFollow.getyPos() + RPG.screenheight/2) < RPG.gameheight
-        && (int)Math.floor(unitFollow.getyPos() - RPG.screenheight/2) > RPG.min_Y)
+        /* gameheight is the maximum height of the game and the 
+		 * min_Y is the minimum y-coordinate of the game i.e. 
+		 * 0.
+		 */
+        if((int)Math.ceil(unitFollow.getyPos() + screenheight/2) < RPG.gameheight
+        && (int)Math.floor(unitFollow.getyPos() - screenheight/2) > RPG.min_Y)
         {
-        		this.yPos = unitFollow.getyPos();
+        	/* re-center only if the game map has enough tiles
+    		 * to be displayed in the y-direction. 
+    		 */
+    		this.yPos = unitFollow.getyPos();
         }
+        
         return; 
     }
     
@@ -101,19 +120,17 @@ public class Camera
      */
     public double getMinX()
     {
-        return (this.xPos - (this.screenwidth)/2); 
-        
+        return (this.xPos - (this.screenwidth)/2);    
     }
     
     /** Returns the maximum x value on screen.
      * @param No parameters.
-     * @return maximum x-coordinate in pixels that should be displayed.
+     * @return maximum x-coordinate in pixels that should be displayed
      * on the screen.
      */
     public double getMaxX()
     {
-        return (this.xPos + (this.screenwidth)/2); 
-        
+        return (this.xPos + (this.screenwidth)/2);    
     }
     
     /** Returns the minimum y value on screen.
@@ -123,8 +140,7 @@ public class Camera
      */
     public double getMinY()
     {	
-    	return (this.yPos - (this.screenheight)/2);
-       
+    	return (this.yPos - (this.screenheight)/2);   
     }
     
     /** Returns the maximum y value on screen.
@@ -135,7 +151,6 @@ public class Camera
     public double getMaxY()
     {
     	return (this.yPos + (this.screenheight)/2); 
-
     }
 
     /** Tells the camera to follow a given unit. 
