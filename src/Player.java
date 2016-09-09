@@ -148,11 +148,11 @@ public class Player
 	 * @param cam - the Camera object that follows the player. 
 	 * @return void.
 	 */
-	public void render(Graphics g, Camera cam)
+	public void render(Graphics g, double cam_minX, double cam_minY)
 	{
 		/* Using translate to make sure the player is printed on 
 		 * the screen. */
-		g.translate(-(float)cam.getMinX(), -(float)cam.getMinY());
+		g.translate(-(float)cam_minX, -(float)cam_minY);
 		
 		/* Draw the player on the screen based on the side (s)he is 
 		 * facing. */

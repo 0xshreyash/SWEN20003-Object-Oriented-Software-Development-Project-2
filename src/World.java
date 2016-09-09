@@ -80,7 +80,7 @@ public class World
     	
     	/* Rendering map and player. */
     	map.render(-start_pixel_x, -start_pixel_y, start_tile_x, start_tile_y, screen_width, screen_height);
-    	player.render(g, this.cam);
+    	player.render(g, this.cam.getMinX(), this.cam.getMinY());
         
     }
 }
