@@ -12,6 +12,9 @@
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
+/** Extends the functionality of the already
+ * available TiledMap class
+ */
 public class Map extends TiledMap
 {
 	/** Create a new Map object
@@ -29,12 +32,12 @@ public class Map extends TiledMap
 	/** Function checks if the player is venturing onto 
 	 * a tile that is blocking or not 
 	 * @param player_x - new x-coordinate of the player.
-	 * @param player_y - new y-coordiante of the player.
+	 * @param player_y - new y-coordinate of the player.
 	 * @return true if tile is blocking else false. 
 	 */
 	public boolean blocks(double player_x, double player_y)
     {
-    	/* Finding coordinates of tile which we check blocking for. */
+    	/* Finding which tile we check blocking for */
     	int x_tile = (int)(player_x/this.getTileWidth()); 
     	int y_tile = (int)(player_y/this.getTileHeight()); 
  

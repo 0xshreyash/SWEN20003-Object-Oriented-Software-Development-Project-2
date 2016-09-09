@@ -32,9 +32,9 @@ public class Player
 	private static final double SPEED = 0.25;
 	
 	/** Current coordinates of the player.*/
-	/** Starting x-coordinates of the player. */
+	/** x-coordinate of the player. */
 	private double xPos = 0; 
-	/** Starting y-coordinates of the player. */
+	/** y-coordinate of the player. */
 	private double yPos = 0; 
 	
 	/** Direction the player is facing. */
@@ -94,7 +94,7 @@ public class Player
 		/* Check for blocking of the player by certain tiles and 
 		 * halt movement if a certain tile blocks. 
 		 */
-		/* Only update the yPos if the xPos caused the blocking. */ 
+		/* Update only the yPos if the xPos caused the blocking. */ 
 		if(map.blocks(new_xPos, new_yPos) && !map.blocks(this.xPos, new_yPos))
 		{
 			
@@ -105,7 +105,7 @@ public class Player
 				this.yPos = new_yPos; 
 			}	 
 		}
-		/* Update the xPos if the yPos is causing the blocking. */
+		/* Update only the xPos if the yPos is causing the blocking. */
 		else if(map.blocks(new_xPos, new_yPos) && !map.blocks(new_xPos, this.yPos))
 		{
 			

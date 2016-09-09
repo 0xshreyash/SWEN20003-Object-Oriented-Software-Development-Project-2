@@ -18,7 +18,7 @@ public class RPG extends BasicGame
     
 	/**************** Attributes *********************/
 	
-    /* Things that will be common to all instance of the game. */
+    /* Things that will be common to all of the game */
    
     /** Screen width, in pixels. */
     public static final int screenwidth = 800;

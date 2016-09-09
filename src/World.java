@@ -21,6 +21,9 @@ public class World
 	/** The only player in the current version of our game. */
 	private Player player = null; 
 	
+	/** The number of extra tiles we need in each direction */
+	private int extra_tiles = 2; 
+	
 	/** The map for our game. */
 	private Map map = null;
 	
@@ -64,10 +67,10 @@ public class World
     {
     	/* Finding screen width and height in tiles. */
     	/* + 2 because we want one extra tile on each side of the screen */
-    	int screen_width = (int)(RPG.screenwidth/map.getTileWidth() + 2);
-    	int screen_height = (int)(RPG.screenheight/map.getTileWidth() + 2);
+    	int screen_width = (int)(RPG.screenwidth/map.getTileWidth()) + extra_tiles;
+    	int screen_height = (int)(RPG.screenheight/map.getTileWidth()) + extra_tiles;
     	
-    	/* Finding co-ordinates of tile to start at. */
+    	/* Finding coordinates of tile to start at. */
     	int start_tile_x = (int)(this.cam.getMinX()/map.getTileWidth()); 
     	int start_tile_y = (int)(this.cam.getMinY()/map.getTileHeight()); 
     	

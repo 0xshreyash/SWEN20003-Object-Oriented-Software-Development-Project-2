@@ -26,7 +26,6 @@ public class Camera
     public final int screenheight;
     
     /** The camera's position in the world, in x and y coordinates. */
-    
     /** x-coordinate of the camera. in pixels. */
     private double xPos;
     /** y-coordinate of the camera, in pixels. */
@@ -34,7 +33,7 @@ public class Camera
     // I went with double for xPos and yPos of the camera 
     // instead of int because I felt that double offers more 
     // precision. So all calculations for positions will be 
-    // of type doulbe unless otherwise specified. 
+    // of type double unless explicitly casted.  
     
     
     /***************** Methods ***********************/
@@ -76,7 +75,7 @@ public class Camera
     /** Update the game camera to re-center it's viewpoint
      * around the player (design extended to make sure that
      * the camera doesn't re-center around the edges of the 
-     * map).
+     * map making sure we don't have black regions appearing)
      * @param No parameters.
      * @return void.
      */
@@ -92,7 +91,7 @@ public class Camera
         && (int)Math.floor(unitFollow.getxPos() - screenwidth/2) > RPG.min_X)
         {
     		/* re-center only if the game map has enough tiles
-    		 * to be displayed in the x-direction. 
+    		 * to be displayed in either side of the x-direction. 
     		 */
         	this.xPos = unitFollow.getxPos(); 
         }
@@ -105,7 +104,7 @@ public class Camera
         && (int)Math.floor(unitFollow.getyPos() - screenheight/2) > RPG.min_Y)
         {
         	/* re-center only if the game map has enough tiles
-    		 * to be displayed in the y-direction. 
+    		 * to be displayed in either side of the y-direction. 
     		 */
     		this.yPos = unitFollow.getyPos();
         }
