@@ -29,5 +29,10 @@ public class Player extends Character
 	{
 		super(playerImagePath);
 	}
+	
+	public void Kill()
+	{
+		
+	}
 
 }
