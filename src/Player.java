@@ -145,7 +145,10 @@ public class Player
 	
 	/** Render the player.
 	 * @param g - the Slick graphics object used for drawing. 
-	 * @param cam - the Camera object that follows the player. 
+	 * @param cam_minX - the minimum x-coordinate displayed on the 
+	 * screen.
+	 * @param cam_minY - the minimum y-coordinate displayed on the 
+	 * screen.
 	 * @return void.
 	 */
 	public void render(Graphics g, double cam_minX, double cam_minY)
