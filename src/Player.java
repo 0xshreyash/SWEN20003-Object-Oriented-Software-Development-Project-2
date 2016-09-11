@@ -30,6 +30,7 @@ public class Player extends Character
 		super(playerImagePath);
 	}
 	
+	/** Will kill enemies bro */
 	public void Kill()
 	{
 		
