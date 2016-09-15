@@ -32,9 +32,10 @@ public class Player extends Character
 	
 	/** Will kill enemies. */
 	public void Kill()
+	throws SlickException
 	{
-		
-		
+		String s = "Hi";
+	
 	}
 
 }
