@@ -39,6 +39,10 @@ public class RPG extends BasicGame
     /** Min y coordinate on the map. */
     public static final int min_Y = 0;
     
+	public static final double starting_X = 756; 
+	/** Starting y-coordinate of the player. */
+	public static final double starting_Y = 684; 
+    
     /** Path to assets folder. */
     public static final String ASSETS = "/assets/";
     

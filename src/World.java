@@ -52,7 +52,7 @@ public class World
     throws SlickException
     {
     	/* Updating our camera and player. */
-        player.update_position(map, dir_x, dir_y, delta);
+        player.update(map, dir_x, dir_y, delta);
         cam.update();
        
         return; 
