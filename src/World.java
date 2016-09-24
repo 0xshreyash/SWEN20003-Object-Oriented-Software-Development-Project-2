@@ -37,9 +37,9 @@ public class World
     throws SlickException
     {
     	/* Define the objects in the map. */
-    	this.player = new Player(RPG.PLAYER_IMG);
-    	this.map = new Map(RPG.MAP, RPG.ASSETS); 
-    	this.cam = new Camera(player, RPG.screenwidth, RPG.screenheight); 
+    	this.player = new Player(Constant.PLAYER);
+    	this.map = new Map(Constant.MAP, Constant.ASSETS); 
+    	this.cam = new Camera(player, Constant.screenwidth, Constant.screenheight); 
     }
     
     /** Update the game state for a frame.
@@ -67,8 +67,8 @@ public class World
     {
     	/* Finding screen width and height in tiles. */
     	/* + 2 because we want one extra tile on each side of the screen */
-    	int screen_width = (int)(RPG.screenwidth/map.getTileWidth()) + extra_tiles;
-    	int screen_height = (int)(RPG.screenheight/map.getTileWidth()) + extra_tiles;
+    	int screen_width = (int)(Constant.screenwidth/map.getTileWidth()) + extra_tiles;
+    	int screen_height = (int)(Constant.screenheight/map.getTileWidth()) + extra_tiles;
     	
     	/* Finding coordinates of tile to start at. */
     	int start_tile_x = (int)(this.cam.getMinX()/map.getTileWidth()); 
@@ -81,6 +81,7 @@ public class World
     	/* Rendering map and player. */
     	map.render(-start_pixel_x, -start_pixel_y, start_tile_x, start_tile_y, screen_width, screen_height);
     	player.render(g, this.cam.getMinX(), this.cam.getMinY());
+    	
         
     }
 }

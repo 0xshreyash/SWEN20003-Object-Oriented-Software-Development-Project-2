@@ -14,11 +14,13 @@ import org.newdawn.slick.SlickException;
 
 public class Player extends Unit
 {
-
-	
 	/** Speed of the player. */
 	private static final double SPEED = 0.25;
- 
+	public static final int starting_X = 756; 
+	public static final int starting_Y = 684;
+
+	
+	private boolean facing_right = true;
     /** Creates the player object.  
      * @param playerImagePath - the path to the file containing the image
      * of the player.
@@ -26,7 +28,7 @@ public class Player extends Unit
 	public Player(String playerImagePath) 
 	throws SlickException
 	{
-		super(playerImagePath, RPG.starting_X, RPG.starting_Y);	
+		super(playerImagePath, starting_X, starting_Y);	
 	}
 	
 	/** Will kill enemies. */
@@ -55,12 +57,12 @@ public class Player extends Unit
 		 * halt movement if a certain tile blocks. 
 		 */
 		/* Update only the yPos if the xPos caused the blocking. */ 
-		if(map.blocks(new_xPos, new_yPos) && !map.blocks(this.xPos, new_yPos))
+		if(map.blocks(new_xPos, new_yPos) && !map.blocks(this.getxPos(), new_yPos))
 		{
 			
 			/* Making sure the new y-position is on the game board. */
-			if(!((int)Math.floor(new_yPos) <= RPG.min_Y
-			 || (int)Math.ceil(new_yPos) >= RPG.gameheight))
+			if(!((int)Math.floor(new_yPos) <= Constant.min_Y
+			 || (int)Math.ceil(new_yPos) >= Constant.gameheight))
 			{
 				this.setxPos(new_yPos); 
 			}	 
@@ -70,8 +72,8 @@ public class Player extends Unit
 		{
 			
 			/* Making sure the new x-position is on the game board. */
-			if(!((int)Math.floor(new_xPos) <= RPG.min_X
-			 || (int)Math.ceil(new_xPos) >= RPG.gamewidth))
+			if(!((int)Math.floor(new_xPos) <= Constant.min_X
+			 || (int)Math.ceil(new_xPos) >= Constant.gamewidth))
 			{
 				this.setxPos(new_xPos);; 
 			}
@@ -80,14 +82,14 @@ public class Player extends Unit
 		else if(!map.blocks(new_xPos, new_yPos))
 		{
 			/* Making sure the new x-position is on the game board. */
-			if(!((int)Math.floor(new_xPos) <= RPG.min_X
-			 || (int)Math.ceil(new_xPos) >= RPG.gamewidth))
+			if(!((int)Math.floor(new_xPos) <= Constant.min_X
+			 || (int)Math.ceil(new_xPos) >= Constant.gamewidth))
 			{
 				this.setxPos(new_xPos);; 
 			}
 			/* Making sure the new y-position is on the game board. */
-			if(!((int)Math.floor(new_yPos) <= RPG.min_Y
-			 || (int)Math.ceil(new_yPos) >= RPG.gameheight))
+			if(!((int)Math.floor(new_yPos) <= Constant.min_Y
+			 || (int)Math.ceil(new_yPos) >= Constant.gameheight))
 			{
 				this.setxPos(new_yPos);
 			}	
@@ -100,6 +102,26 @@ public class Player extends Unit
 		else if(dir_x < 0)
 		{
 			this.facing_right = false; 
+		}
+		
+		
+	}
+	
+	public void render(Graphics g, double cam_minX, double cam_minY)
+	{
+		/* Using translate to make sure the player is printed on 
+		 * the screen. */
+		g.translate(-(float)cam_minX, -(float)cam_minY);
+		
+		/* Draw the player on the screen based on the side (s)he is 
+		 * facing. */
+		if(this.facing_right)
+		{
+			Constant.PLAYER.drawCentered((float)xPos, (float)yPos);
+		}
+		else
+		{
+			unit_image_inverted.drawCentered((float)xPos, (float)yPos);
 		}		
 	}
 

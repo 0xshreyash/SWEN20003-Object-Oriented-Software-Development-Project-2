@@ -1,9 +1,9 @@
-/* SWEN20003 Object Oriented Software Development  
+/* SWEN20003 Object Oriented Software Development   
  * RPG Game Engine
  * Author: Matt Giuca <mgiuca>
  */
 
-import org.newdawn.slick.AppGameContainer; 
+import org.newdawn.slick.AppGameContainer;  
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Graphics;
@@ -17,45 +17,7 @@ public class RPG extends BasicGame
 {
     
 	/**************** Attributes *********************/
-	
-    /* Things that will be common to all of the game */
-   
-    /** Screen width, in pixels. */
-    public static final int screenwidth = 800;
     
-    /** Screen height, in pixels. */
-    public static final int screenheight = 600;
-    
-    /** Game width, in pixels. */
-    public static final int gamewidth = 6912;
-    
-    /** Game height, in pixels. */
-    public static final int gameheight = 6912;
-    
-    /** Minimum coordinates on the map. */
-    /** Min x coordinate on the map. */
-    public static final int min_X = 0; 
-    
-    /** Min y coordinate on the map. */
-    public static final int min_Y = 0;
-    
-	public static final double starting_X = 756; 
-	/** Starting y-coordinate of the player. */
-	public static final double starting_Y = 684; 
-    
-    /** Path to assets folder. */
-    public static final String ASSETS = "/assets/";
-    
-    /** Path to image of player from inside the assets folder. */
-    public static final String PLAYER_IMG = "/assets/units/player.png";
-    
-    /** Path to image of tiles from inside the assets folder. */
-    public static final String TILES_IMG = "/assets/tiles.png"; 
-    
-    /** Path to map.tmx from inside the assets folder. */
-    public static final String MAP = "/assets/map.tmx";
-    
-    /* Other attributes. */
     private World world;
     
     /***************** Methods ***********************/
@@ -90,8 +52,11 @@ public class RPG extends BasicGame
         Input input = gc.getInput();
 
         // Update the player's movement direction based on keyboard presses.
-        double dir_x = 0;
-        double dir_y = 0;
+        int dir_x = 0;
+        int dir_y = 0;
+        int attack = 0; 
+        int talk = 0; 
+        
         if (input.isKeyDown(Input.KEY_DOWN))
             dir_y += 1;
         if (input.isKeyDown(Input.KEY_UP))
@@ -100,6 +65,11 @@ public class RPG extends BasicGame
             dir_x -= 1;
         if (input.isKeyDown(Input.KEY_RIGHT))
             dir_x += 1;
+        if(input.isKeyDown(Input.KEY_A))
+        	attack = 1;
+        if(input.isKeyDown(Input.KEY_T))
+        	talk = 1;
+        	
 
         // Let World.update decide what to do with this data.
         world.update(dir_x, dir_y, delta);
@@ -127,7 +97,7 @@ public class RPG extends BasicGame
         AppGameContainer app = new AppGameContainer(new RPG());
         // setShowFPS(true), to show frames-per-second.
         app.setShowFPS(true);
-        app.setDisplayMode(screenwidth, screenheight, false);
+        app.setDisplayMode(Constant.screenwidth, Constant.screenheight, false);
         app.start();
     }
 }
