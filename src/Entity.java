@@ -9,7 +9,6 @@
  */
 
 import org.newdawn.slick.Graphics; 
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
@@ -31,11 +30,6 @@ public class Entity
 	
 	/** Current coordinates of the player.*/
 	private Vector2f pos;
-	
-	/** Direction the player is facing. */
-	private boolean facing_right = true; 
-	
-
 	
 	/***************** Methods ***********************/
 	
