@@ -24,16 +24,8 @@ public class Camera
     public final int screenwidth;
     /** Screen height, in pixels. */
     public final int screenheight;
-    
-    /** The camera's position in the world, in x and y coordinates. */
-    /** x-coordinate of the camera. in pixels. */
-    private double xPos;
-    /** y-coordinate of the camera, in pixels. */
-    private double yPos;
-    // I went with double for xPos and yPos of the camera 
-    // instead of int because I felt that double offers more 
-    // precision. So all calculations for positions will be 
-    // of type double unless explicitly casted.  
+  
+
     
     
     /***************** Methods ***********************/
@@ -58,19 +50,19 @@ public class Camera
      * @param No parameters.
      * @return x-coordinate of the camera.
      */
-    public double getxPos() 
+    /*public double getxPos() 
     {
     	return this.xPos;
-    }
+    }*/
 
     /** Getter method to get the yPos of the camera.
      * @param No parameters.
      * @return y-coordinate of the camera.
      */
-    public double getyPos() 
+    /*public double getyPos() 
     {
         return this.yPos;
-    }
+    }*/
 
     /** Update the game camera to re-center it's viewpoint
      * around the player (design extended to make sure that
@@ -87,27 +79,27 @@ public class Camera
 		 * min_X is the minimum x-coordinate of the game i.e. 
 		 * 0.
 		 */
-        if((int)Math.ceil(unitFollow.getxPos() + screenwidth/2) < RPG.gamewidth
-        && (int)Math.floor(unitFollow.getxPos() - screenwidth/2) > RPG.min_X)
-        {
+        //if((int)Math.ceil(unitFollow.getxPos() + screenwidth/2) < Constant.gamewidth
+        //&& (int)Math.floor(unitFollow.getxPos() - screenwidth/2) > Constant.min_X)
+        //{
     		/* re-center only if the game map has enough tiles
     		 * to be displayed in either side of the x-direction. 
     		 */
-        	this.xPos = unitFollow.getxPos(); 
-        }
+        	//this.xPos = unitFollow.getxPos(); 
+        //}
         
         /* gameheight is the maximum height of the game and the 
 		 * min_Y is the minimum y-coordinate of the game i.e. 
 		 * 0.
 		 */
-        if((int)Math.ceil(unitFollow.getyPos() + screenheight/2) < RPG.gameheight
-        && (int)Math.floor(unitFollow.getyPos() - screenheight/2) > RPG.min_Y)
-        {
+        //if((int)Math.ceil(unitFollow.getyPos() + screenheight/2) < Constant.gameheight
+        //&& (int)Math.floor(unitFollow.getyPos() - screenheight/2) > Constant.min_Y)
+        //{
         	/* re-center only if the game map has enough tiles
     		 * to be displayed in either side of the y-direction. 
     		 */
-    		this.yPos = unitFollow.getyPos();
-        }
+    		//this.yPos = unitFollow.getyPos();
+        //}
         
         return; 
     }
@@ -119,7 +111,7 @@ public class Camera
      */
     public double getMinX()
     {
-        return (this.xPos - (this.screenwidth)/2);    
+        return (unitFollow.getxPos() - (this.screenwidth)/2);    
     }
     
     /** Returns the maximum x value on screen.
@@ -129,7 +121,7 @@ public class Camera
      */
     public double getMaxX()
     {
-        return (this.xPos + (this.screenwidth)/2);    
+        return (unitFollow.getxPos() + (this.screenwidth)/2);    
     }
     
     /** Returns the minimum y value on screen.
@@ -139,7 +131,7 @@ public class Camera
      */
     public double getMinY()
     {	
-    	return (this.yPos - (this.screenheight)/2);   
+    	return (unitFollow.getyPos() - (this.screenheight)/2);   
     }
     
     /** Returns the maximum y value on screen.
@@ -149,7 +141,7 @@ public class Camera
      */
     public double getMaxY()
     {
-    	return (this.yPos + (this.screenheight)/2); 
+    	return (unitFollow.getyPos() + (this.screenheight)/2); 
     }
 
     /** Tells the camera to follow a given unit. 

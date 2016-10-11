@@ -80,6 +80,7 @@ public class World
     	
     	/* Rendering map and player. */
     	map.render(-start_pixel_x, -start_pixel_y, start_tile_x, start_tile_y, screen_width, screen_height);
+    	g.translate(-(float)cam.getMinX(), -(float)cam.getMinY());
     	player.render(g, this.cam.getMinX(), this.cam.getMinY());
     	
         

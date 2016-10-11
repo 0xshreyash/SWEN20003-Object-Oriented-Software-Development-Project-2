@@ -12,7 +12,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Player extends Unit
+public class Player extends Entity
 {
 	/** Speed of the player. */
 	private static final double SPEED = 0.25;
