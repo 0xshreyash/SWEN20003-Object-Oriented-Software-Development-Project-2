@@ -60,6 +60,18 @@ public class Constant {
 	    /** Path to map.tmx from inside the assets folder. */
 	    public static final String MAP = "map.tmx";
 	    
+	    /** Player speed */ 
+	    public static final float PLAYER_SPEED = 0.25f;
+	    
+	    /** Aggressive Monster speed */ 
+	    public static final float AG_MONSTER_SPEED = 0.25f;
+	    
+	    /** Passive Monster speed */ 
+	    public static final float PA_MONSTER_SPEED = 0.20f;
+	    
+	    
+	    
+	    
 		
 
 }

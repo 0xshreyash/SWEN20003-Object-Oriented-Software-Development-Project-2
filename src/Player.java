@@ -12,7 +12,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Player extends Entity
+public class Player extends Unit
 {
 	/** Speed of the player. */
 	private static final double SPEED = 0.25;
@@ -36,7 +36,6 @@ public class Player extends Entity
 	throws SlickException
 	{
 		
-	
 	}
 	
 	/** Updates the position of the player in order to render it.
@@ -105,24 +104,6 @@ public class Player extends Entity
 		}
 		
 		
-	}
-	
-	public void render(Graphics g, double cam_minX, double cam_minY)
-	{
-		/* Using translate to make sure the player is printed on 
-		 * the screen. */
-		g.translate(-(float)cam_minX, -(float)cam_minY);
-		
-		/* Draw the player on the screen based on the side (s)he is 
-		 * facing. */
-		if(this.facing_right)
-		{
-			Constant.PLAYER.drawCentered((float)xPos, (float)yPos);
-		}
-		else
-		{
-			unit_image_inverted.drawCentered((float)xPos, (float)yPos);
-		}		
 	}
 
 }
