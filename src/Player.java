@@ -37,14 +37,44 @@ public class Player extends Unit
 	 * @param delta - the time elapsed since the last update.
 	 * @return - void.
 	 */
-	public void update(Map map, float dir_x, float dir_y, int delta)
+	public void update(Map map, float dir_x, float dir_y, int delta, int )
 	{
 		super.update(map, dir_x, dir_y, delta);	
 		
 	}
 
-	public void render(Graphics g, double cam_minX, double cam_minY)
+	public void render(Graphics g, float cam_minX, float cam_minY)
 	{
-		super.render(g, cam_minX, cam_minY);
+		
+		
+	}
+
+	@Override
+	public boolean withinRange(Interactable other) {
+		return super.withinRange(Interactable other);
+	}
+
+	@Override
+	public void action(Interactable other) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isInteractor(Interactable other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Enum<?>[] getTag() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void update(Map map, int dir_x, int dir_y, int delta) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -5,24 +5,23 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
-public class Amulet extends Item
+public class Tome extends Item
 {
 	
-	public static int hpBonus; 
+	public static int attackSpeedBoost; 
 	
 	
-	public Amulet(float starting_X, float starting_Y, String item_Image, String item_Name, int HP_BONUS) 
+	public Tome(float starting_X, float starting_Y, String item_Image, String item_Name, int decrease_coolDown) 
 	throws SlickException
 	{
 		super(starting_X, starting_Y, item_Image, item_Name);
-		hpBonus = HP_BONUS;	
+		attackSpeedBoost = decrease_coolDown;	
 	}
 	
 	public void action(Interactable other)
 	{
 		if(this.getCollected() && this.isInteractor(other))
 		{
-			
 			other.action(this);
 		}
 		return;

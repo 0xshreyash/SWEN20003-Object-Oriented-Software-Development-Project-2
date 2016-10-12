@@ -3,7 +3,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.Image;
 
-// To-do: check for range
+// To-do: check for range. 
+// To-do: the getInteractors() method. 
 public abstract class Item extends Entity implements Interactable
 {
 	private Image itemImage;
@@ -17,9 +18,21 @@ public abstract class Item extends Entity implements Interactable
 		super(starting_X, starting_Y);
 		itemImage = new Image(item_image);
 		collected = false; 
-		itemName = item_name; // Check this out. 
-
+		itemName = item_name; // Check this out. 	
+	}
 	
+	public String getItemName() 
+	{
+		return this.itemName;
+	}
+	public boolean getCollected()
+	{
+		return collected;
+	}
+	
+	public void setCollected(boolean change)
+	{
+		collected = change;
 		
 	}
 	
@@ -38,8 +51,9 @@ public abstract class Item extends Entity implements Interactable
 		return true;
 	}
 	
-	public Enum<?>[] getInteractors()
+	
+	public static boolean implementsInteractable(Object object, Class interf)
 	{
-		return Player;
+	    return interf.isInstance(object);
 	}
 }

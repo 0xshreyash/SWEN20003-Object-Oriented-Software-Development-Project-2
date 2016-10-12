@@ -48,11 +48,11 @@ public class World
      * @param delta Time passed since last frame (milliseconds).
      * @return void.
      */
-    public void update(double dir_x, double dir_y, int delta)
+    public void update(float dir_x, float dir_y, int delta, int attack, int talk)
     throws SlickException
     {
     	/* Updating our camera and player. */
-        player.update(map, dir_x, dir_y, delta);
+        player.update(map, dir_x, dir_y, delta, attack, talk);
         cam.update();
        
         return; 

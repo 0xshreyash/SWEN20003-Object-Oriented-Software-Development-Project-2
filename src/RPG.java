@@ -66,13 +66,13 @@ public class RPG extends BasicGame
         if (input.isKeyDown(Input.KEY_RIGHT))
             dir_x += 1;
         if(input.isKeyDown(Input.KEY_A))
-        	attack = 1;
+        		attack = 1;
         if(input.isKeyDown(Input.KEY_T))
-        	talk = 1;
+        		talk = 1;
         	
 
         // Let World.update decide what to do with this data.
-        world.update(dir_x, dir_y, delta);
+        world.update(dir_x, dir_y, delta, attack, talk);
     }
 
     /** Render the entire screen, so it reflects the current game state.

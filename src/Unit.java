@@ -15,7 +15,7 @@ import org.newdawn.slick.SlickException;
 public abstract class Unit extends Entity implements Interactable
 {
 	/** Max HP of the Unit */ 
-	private final int maxHP;
+	private int maxHP;
 	/** HP of the Unit */
 	private int HP; 
 	
@@ -30,10 +30,10 @@ public abstract class Unit extends Entity implements Interactable
 	private final float speed;
 
 	/** Max damage caused by the Unit */ 
-	private final int maxDamage;
+	private  int maxDamage;
 	
 	/** Max coolDown time of the Unit */
-	private final int maxCoolDown;
+	private int maxCoolDown;
 	/** coolDown time of the Unit */
 	private int coolDown; 
 	
@@ -49,6 +49,12 @@ public abstract class Unit extends Entity implements Interactable
 	{
 		HP = hP;
 	}
+	
+	public void setMaxHP(int newMaxHP) 
+	{
+		maxHP = newMaxHP;
+	}
+
 
 	public int getCoolDown()
 	{

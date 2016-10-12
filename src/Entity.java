@@ -89,10 +89,4 @@ public abstract class Entity
 		unit_image_inverted = unit_image.getFlippedCopy(true, false); */
 	}
 	
-	
-	/** Render the player.
-	 * @return void.
-	 */
-	public abstract void render();
-	
 }
