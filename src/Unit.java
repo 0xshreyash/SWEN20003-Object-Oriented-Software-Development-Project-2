@@ -8,11 +8,11 @@
  * in the program.
  */
 
-import org.newdawn.slick.Graphics;c
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public abstract class Unit extends Entity implements Interactable
+public abstract class Unit extends Entity
 {
 	/** Max HP of the Unit */ 
 	private int maxHP;
@@ -53,6 +53,11 @@ public abstract class Unit extends Entity implements Interactable
 	public void setMaxHP(int newMaxHP) 
 	{
 		maxHP = newMaxHP;
+	}
+	
+	public void setMaxDamage(int newMaxDamage) 
+	{
+		maxDamage = newMaxDamage;
 	}
 
 
@@ -183,7 +188,8 @@ public abstract class Unit extends Entity implements Interactable
 		}	
 	}
 	
-	public void render(Graphics g, double cam_minX, double cam_minY)
+	
+	public void render(Graphics g, float cam_minX, float cam_minY)
 	{
 		/* Using translate to make sure the player is printed on 
 		 * the screen. */
@@ -203,5 +209,12 @@ public abstract class Unit extends Entity implements Interactable
 			}	
 		}
 	}
+	
+	
+    public float distance(float x2, float y2)
+    {
+    	return (float)(Math.sqrt((float)(Math.pow(this.getxPos()-x2, 2) + 
+    			Math.pow(this.getyPos()-y2, 2))));
+    }
 
 }

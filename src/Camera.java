@@ -109,7 +109,7 @@ public class Camera
      * @return minimum x-coordinate in pixels that should be displayed
      * on the screen.
      */
-    public double getMinX()
+    public float getMinX()
     {
         return (unitFollow.getxPos() - (this.screenwidth)/2);    
     }
@@ -119,7 +119,7 @@ public class Camera
      * @return maximum x-coordinate in pixels that should be displayed
      * on the screen.
      */
-    public double getMaxX()
+    public float getMaxX()
     {
         return (unitFollow.getxPos() + (this.screenwidth)/2);    
     }
@@ -129,7 +129,7 @@ public class Camera
      * @return minimum y-coordinate in pixels that should be displayed.
      * on the screen.
      */
-    public double getMinY()
+    public float getMinY()
     {	
     	return (unitFollow.getyPos() - (this.screenheight)/2);   
     }
@@ -139,7 +139,7 @@ public class Camera
      * @return maximum y-coordinate in pixels that should be displayed
      * on the screen.
      */
-    public double getMaxY()
+    public float getMaxY()
     {
     	return (unitFollow.getyPos() + (this.screenheight)/2); 
     }

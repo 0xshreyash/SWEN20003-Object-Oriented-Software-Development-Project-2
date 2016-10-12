@@ -5,7 +5,7 @@ import org.newdawn.slick.SlickException;
 /**
  * 
  */
-public abstract class Villager extends Unit 
+public abstract class Villager extends Unit
 {
 
     private String VillagerDialog[]; 
@@ -35,6 +35,10 @@ public abstract class Villager extends Unit
     	return VillagerDialog;
     }
     
+    public boolean isInteractor(Interactable other)
+    {
+    	return other instanceof Player;
+    }
     
 
 }

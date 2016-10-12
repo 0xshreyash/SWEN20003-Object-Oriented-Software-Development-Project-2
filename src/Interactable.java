@@ -5,15 +5,15 @@ import org.newdawn.slick.Graphics;
 
 public interface Interactable 
 {	
-	public abstract boolean withinRange(Interactable other);
+	//public abstract float distance(float x2, float y2);
 	
 	public abstract void action(Interactable other);
 	
-	//public abstract boolean isInteractor(Interactable other);
+	public abstract boolean isInteractor(Interactable other);
 	
-	public abstract Class getTag();
+	public abstract Class<? extends Entity> getTag();
 	
-	public abstract void update(Map map, int dir_x, int dir_y, int delta);
+	public abstract void update(Map map, float dir_x, float dir_y, int delta);
 	
 	public abstract void render(Graphics g, float cam_minX, float cam_minY);
 }

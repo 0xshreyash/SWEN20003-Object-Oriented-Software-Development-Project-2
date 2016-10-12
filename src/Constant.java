@@ -171,7 +171,7 @@ public class Constant
 	    
 	    public static final String PRINCE = "prince";
 	    
-	    public static final String SHAMAN = "prince";
+	    public static final String SHAMAN = "elvira";
 	    
 	    public static final int VillagerHP = 1;
 	    
@@ -213,9 +213,9 @@ public class Constant
 	    public static final float PA_MONSTER_SPEED = 0.20f;
 	    
 	    /** Follow range */
-	    public static final float FOLLOW_FOR = 150f; 
+	    public static final float FOLLOW_RANGE = 150f; 
 	    
-	    public static final float ATTACK_FOR = 50f;
+	    public static final float ATTACK_RANGE = 50f;
 	    
 	    public static final float BAR_WIDTH = 20f; 
 	    

@@ -24,6 +24,18 @@ public class PrinceAldric extends Villager implements Interactable
     {
     	String []Dialog = this.getDialog();
     	
+    }
+
+    public Class<? extends Entity> getTag()
+    {
+    	return this.getClass();
     	
     }
+
+	
+	public void action(Interactable other)
+	{
+		
+		
+	}
 }

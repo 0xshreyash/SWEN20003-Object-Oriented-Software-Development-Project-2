@@ -5,12 +5,11 @@ import org.newdawn.slick.Image;
 
 // To-do: check for range. 
 // To-do: the getInteractors() method. 
-public abstract class Item extends Entity implements Interactable
+public abstract class Item extends Entity
 {
 	private Image itemImage;
 	private String itemName;
 	private boolean collected; 
-	private float range;
 	
 	public Item(float starting_X, float starting_Y, String item_image, String item_name)
 	throws SlickException
@@ -25,6 +24,7 @@ public abstract class Item extends Entity implements Interactable
 	{
 		return this.itemName;
 	}
+	
 	public boolean getCollected()
 	{
 		return collected;
@@ -36,24 +36,25 @@ public abstract class Item extends Entity implements Interactable
 		
 	}
 	
-	
-	public void render(Graphics g, float cam_minX, float cam_minY)
+	public void render(Graphics g, float offScreenX, float offScreenY)
 	{
-		if(this.getxPos() >= cam_minX && this.getyPos() >= cam_minY)
-		{
+		if(!collected)
 			itemImage.drawCentered(this.getxPos(), this.getyPos());
-		}
+		else
+			itemImage.drawCentered(offScreenX, offScreenY);
+	}
+	
+	public boolean isInteractor(Interactable other)
+	{
+	    	return other instanceof Player;
+	}
+	
+
+
+	public void update(Map map, float dir_x, float dir_y, int delta) 
+	{
+		
 		
 	}
 	
-	public boolean withinRange(Player player)
-	{
-		return true;
-	}
-	
-	
-	public static boolean implementsInteractable(Object object, Class interf)
-	{
-	    return interf.isInstance(object);
-	}
 }

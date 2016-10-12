@@ -32,7 +32,6 @@ public class World
 	/** The camera that follows the player. */
 	private Camera cam = null;
 	
-	private 
 
 	/***************** Methods ***********************/
 	
@@ -41,7 +40,7 @@ public class World
     throws SlickException
     {
     	/* Define the objects in the map. */
-    	this.player = new Player(Constant.PLAYER);
+    	this.player = new Player();
     	this.map = new Map(Constant.MAP, Constant.ASSETS); 
     	this.cam = new Camera(player, Constant.screenwidth, Constant.screenheight); 
     }

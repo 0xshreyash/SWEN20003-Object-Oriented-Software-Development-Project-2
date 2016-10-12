@@ -12,20 +12,20 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Player extends Unit
+public class Player extends Unit implements Interactable
 {
 
     /** Creates the player object.  
      * @param playerImagePath - the path to the file containing the image
      * of the player.
      */
-	public Player(String playerImagePath, float starting_X, float starting_Y,
-			int max_HP, float player_speed, int max_Damage, int max_CoolDown) 
+	public Player() 
 	throws SlickException
 	{
 		//String UnitImagePath, float starting_X, float starting_Y,
 		//int max_HP, float unit_speed, int max_Damage, int max_CoolDown
-		super(playerImagePath, starting_X, starting_Y, max_HP, player_speed, max_Damage, max_CoolDown);	
+		super(Constant.PLAYER_PATH, Constant.player_starting_X, Constant.player_starting_Y, 
+				Constant.PlayerHP, Constant.PLAYER_SPEED, Constant.PlayerDamage, Constant.PlayerCooldown);	
 		
 	}
 	
@@ -37,44 +37,29 @@ public class Player extends Unit
 	 * @param delta - the time elapsed since the last update.
 	 * @return - void.
 	 */
-	public void update(Map map, float dir_x, float dir_y, int delta, int )
+	public void update(Map map, float dir_x, float dir_y, int delta, int attack, int talk)
 	{
 		super.update(map, dir_x, dir_y, delta);	
 		
 	}
 
-	public void render(Graphics g, float cam_minX, float cam_minY)
+
+	public void action(Interactable other) 
 	{
 		
-		
-	}
-
-	@Override
-	public boolean withinRange(Interactable other) {
-		return super.withinRange(Interactable other);
-	}
-
-	@Override
-	public void action(Interactable other) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean isInteractor(Interactable other) {
 		// TODO Auto-generated method stub
-		return false;
+		return (other instanceof MonsterAggressive)||(other instanceof MonsterPassive)
+				||(other instanceof Item)||(other instanceof Villager);
 	}
 
 	@Override
-	public Enum<?>[] getTag() {
+	public Class<? extends Unit> getTag() {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(Map map, int dir_x, int dir_y, int delta) {
-		// TODO Auto-generated method stub
-		
+		return this.getClass();
 	}
 }
