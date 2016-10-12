@@ -12,7 +12,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
-public class Entity
+public abstract class Entity
 {
 	/**************** Attributes *********************/
 	
@@ -91,28 +91,8 @@ public class Entity
 	
 	
 	/** Render the player.
-	 * @param g - the Slick graphics object used for drawing. 
-	 * @param cam_minX - the minimum x-coordinate displayed on the 
-	 * screen.
-	 * @param cam_minY - the minimum y-coordinate displayed on the 
-	 * screen.
 	 * @return void.
 	 */
-	public void render(Graphics g, double cam_minX, double cam_minY)
-	{
-		/* Using translate to make sure the player is printed on 
-		 * the screen. */
-		
-		
-		/* Draw the player on the screen based on the side (s)he is 
-		 * facing. */
-		/*if(this.facing_right)
-		{
-			unit_image.drawCentered((float)xPos, (float)yPos);
-		}
-		else
-		{
-			unit_image_inverted.drawCentered((float)xPos, (float)yPos);
-		}*/	
-	}
+	public abstract void render();
+	
 }

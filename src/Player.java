@@ -14,27 +14,18 @@ import org.newdawn.slick.SlickException;
 
 public class Player extends Unit
 {
-	/** Speed of the player. */
-	private static final double SPEED = 0.25;
-	public static final int starting_X = 756; 
-	public static final int starting_Y = 684;
 
-	
-	private boolean facing_right = true;
     /** Creates the player object.  
      * @param playerImagePath - the path to the file containing the image
      * of the player.
      */
-	public Player(String playerImagePath) 
+	public Player(String playerImagePath, float starting_X, float starting_Y,
+			int max_HP, float player_speed, int max_Damage, int max_CoolDown) 
 	throws SlickException
 	{
-		super(playerImagePath, starting_X, starting_Y);	
-	}
-	
-	/** Will kill enemies. */
-	public void Kill()
-	throws SlickException
-	{
+		//String UnitImagePath, float starting_X, float starting_Y,
+		//int max_HP, float unit_speed, int max_Damage, int max_CoolDown
+		super(playerImagePath, starting_X, starting_Y, max_HP, player_speed, max_Damage, max_CoolDown);	
 		
 	}
 	
@@ -46,64 +37,14 @@ public class Player extends Unit
 	 * @param delta - the time elapsed since the last update.
 	 * @return - void.
 	 */
-	public void update(Map map, double dir_x, double dir_y, int delta)
+	public void update(Map map, float dir_x, float dir_y, int delta)
 	{
-		/* Prospective x and y-coordinates computed */
-		double new_xPos  = this.getxPos() + dir_x*SPEED * delta; 
-		double new_yPos =  this.getyPos() + dir_y*SPEED * delta; 
-		
-		/* Check for blocking of the player by certain tiles and 
-		 * halt movement if a certain tile blocks. 
-		 */
-		/* Update only the yPos if the xPos caused the blocking. */ 
-		if(map.blocks(new_xPos, new_yPos) && !map.blocks(this.getxPos(), new_yPos))
-		{
-			
-			/* Making sure the new y-position is on the game board. */
-			if(!((int)Math.floor(new_yPos) <= Constant.min_Y
-			 || (int)Math.ceil(new_yPos) >= Constant.gameheight))
-			{
-				this.setxPos(new_yPos); 
-			}	 
-		}
-		/* Update only the xPos if the yPos is causing the blocking. */
-		else if(map.blocks(new_xPos, new_yPos) && !map.blocks(new_xPos, getyPos()))
-		{
-			
-			/* Making sure the new x-position is on the game board. */
-			if(!((int)Math.floor(new_xPos) <= Constant.min_X
-			 || (int)Math.ceil(new_xPos) >= Constant.gamewidth))
-			{
-				this.setxPos(new_xPos);; 
-			}
-		}
-		/* Update both if none of the xPos and yPos cause blocking. */
-		else if(!map.blocks(new_xPos, new_yPos))
-		{
-			/* Making sure the new x-position is on the game board. */
-			if(!((int)Math.floor(new_xPos) <= Constant.min_X
-			 || (int)Math.ceil(new_xPos) >= Constant.gamewidth))
-			{
-				this.setxPos(new_xPos);; 
-			}
-			/* Making sure the new y-position is on the game board. */
-			if(!((int)Math.floor(new_yPos) <= Constant.min_Y
-			 || (int)Math.ceil(new_yPos) >= Constant.gameheight))
-			{
-				this.setxPos(new_yPos);
-			}	
-		}	
-		/* Check which side the player is facing. */
-		if(dir_x > 0)
-		{
-			this.facing_right = true; 
-		}
-		else if(dir_x < 0)
-		{
-			this.facing_right = false; 
-		}
-		
+		super.update(map, dir_x, dir_y, delta);	
 		
 	}
 
+	public void render(Graphics g, double cam_minX, double cam_minY)
+	{
+		super.render(g, cam_minX, cam_minY);
+	}
 }

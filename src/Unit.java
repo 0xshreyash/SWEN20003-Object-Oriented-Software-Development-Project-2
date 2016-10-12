@@ -12,7 +12,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Unit extends Entity
+public abstract class Unit extends Entity implements Interactable
 {
 	/** Max HP of the Unit */ 
 	private final int maxHP;
@@ -186,6 +186,7 @@ public class Unit extends Entity
 		/* Draw the player on the screen based on the side (s)he is 
 		 * facing. */
 		if (this.getxPos() >= cam_minX && this.getyPos() >= cam_minY)
+		{
 			if(this.facing_right)
 			{
 				unit_image.drawCentered(this.getxPos(), this.getyPos());
@@ -193,7 +194,8 @@ public class Unit extends Entity
 			else
 			{
 				unit_image_inverted.drawCentered(this.getxPos(), this.getyPos());
-			}		
+			}	
+		}
 	}
 
 }
