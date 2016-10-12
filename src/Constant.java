@@ -1,6 +1,4 @@
-import org.newdawn.slick.geom.Vector2f;
-
-
+// Add comments
 public class Constant 
 {
 
@@ -101,12 +99,38 @@ public class Constant
 	    
 	    public static final int NumberOfZombies = 38; 
 	    
-	    public static final int NumberOfBandits = 72; 
+	    public static final int NumberOfBandits = 34; 
 	    
-	    public static final int 
+	    public static final int NumberOfSkeleton = 24; 
 	    
-    		
-				
+	    public static final int NumberOfDraelic = 1;
+	    
+	    public static final int BatHP = 40; 
+	    
+	    public static final int ZombieHP = 60;
+	    
+	    public static final int BanditHP = 40; 
+	    
+	    public static final int SkeletonHP = 100;
+	    
+	    public static final int DraelicHP = 140;
+	    
+	    public static final int ZombieDamage = 10; 
+	    
+	    public static final int BanditDamage = 8;
+	    
+	    public static final int SkeletonDamage = 16; 
+	    
+	    public static final int DraelicDamage = 30; 
+	    
+	    public static final int ZombieCooldown = 800;
+	    
+	    public static final int BanditCooldown = 200;
+	    
+	    public static final int SkeletonCooldown = 500;
+	    
+	    public static final int DraelicCooldown = 400;
+	    		
 	    /** Screen width, in pixels. */
 	    public static final int screenwidth = 800;
 	    
@@ -126,27 +150,55 @@ public class Constant
 	    /** Min y coordinate on the map. */
 	    public static final int min_Y = 0;
 	    
-		public static final double starting_X = 756; 
+		public static final float player_starting_X = 756; 
 		/** Starting y-coordinate of the player. */
-		public static final double starting_Y = 684; 
+		public static final float player_starting_Y = 684; 
 	    
 	    public static final String ASSETS = "/assets/";
 	    /** Path to image of tiles from inside the assets folder. */
 	    
-	    public static final String TILES_IMG = "tiles.png"; 
+	    public static final String TILES_IMG = "tiles.png";
 	    
-	   
+	    /** Villager related constants */
 	    
+	    public static final String PEASANT_PATH = "units/peasant.png";
 	    
+	    public static final String PRINCE_PATH = "units/prince.png";
 	    
-	    public static final String PEASANT = "units/peasant.png";
+	    public static final String SHAMAN_PATH = "units/prince.png"; 
 	    
-	    public static final String PLAYER = "units/player.png";
+	    public static final String PEASANT = "peasant";
 	    
-	    public static final String PRINCE = "units/prince.png";
+	    public static final String PRINCE = "prince";
 	    
-	    public static final String SHAMAN = "units/prince.png"; 
+	    public static final String SHAMAN = "prince";
 	    
+	    public static final int VillagerHP = 1;
+	    
+	    public static final int VillagerCooldown = 0;
+	    
+	    public static final int VillagerDamage = 0;
+	    
+	    public static final int VillagerSpeed = 0;
+	    
+	    public static final float PrinceX = 467;
+	    public static final float PrinceY = 679;
+	    public static final float ElviraX = 738;
+	    public static final float ElivraY = 549;
+	    public static final float GarthX = 756;
+	    public static final float GarthY = 870;
+	    
+	    /** Player related constants */
+	    
+	    public static final String PLAYER_PATH = "units/player.png";
+	    
+	    public static final String PLAYER = "player";
+	    
+	    public static final int PlayerHP = 100; 
+	    
+	    public static final int PlayerDamage = 26; 
+	    
+	    public static final int PlayerCooldown = 600;
 	    
 	    /** Path to map.tmx from inside the assets folder. */
 	    public static final String MAP = "map.tmx";
@@ -160,9 +212,26 @@ public class Constant
 	    /** Passive Monster speed */ 
 	    public static final float PA_MONSTER_SPEED = 0.20f;
 	    
+	    /** Follow range */
+	    public static final float FOLLOW_FOR = 150f; 
 	    
+	    public static final float ATTACK_FOR = 50f;
 	    
+	    public static final float BAR_WIDTH = 20f; 
 	    
-		
+	    public static final float PIXEL_CHAR = 9.5f;
+	    
+	    public static final String AldricSays[] = 
+	    	{"Please seek out the Elixir of Life to cure the king.",
+	        "The elixir! My father is cured! Thank you!"};
 
+	    public static final String ElviraSays[] = 
+	    	{"Return to me if you ever need healing.",
+	        "You're looking much healthier now."};
+	    
+	    public static final String GarthSays[] = 
+	    	{"Find the Amulet of Vitality, across the river to the west.",
+	        "Find the Sword of Strength - cross the bridge to the east, then head south.",
+	        "Find the Tome of Agility, in the Land of Shadows.",
+	        "You have found all the treasure I know of."};
 }

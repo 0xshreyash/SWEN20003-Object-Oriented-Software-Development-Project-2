@@ -8,7 +8,7 @@
  * in the program.
  */
 
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Graphics;c
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 

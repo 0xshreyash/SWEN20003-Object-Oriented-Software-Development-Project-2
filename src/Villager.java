@@ -1,67 +1,40 @@
 
 import java.util.*;
+import org.newdawn.slick.SlickException;
 
 /**
  * 
  */
-public abstract class Villager extends Unit {
+public abstract class Villager extends Unit 
+{
 
-    /**
-     * Default constructor
-     */
-    public Villager() {
+    private String VillagerDialog[]; 
+    
+    private String VillagerName; 
+    
+    public Villager(String VillagerImagePath, float starting_X, float starting_Y,
+			 String []Dialog, String name) 
+    throws SlickException
+    {
+    	super(VillagerImagePath, starting_X, starting_Y
+    			,Constant.VillagerHP, Constant.VillagerSpeed
+    			,Constant.VillagerDamage, Constant.VillagerCooldown);
+    	
+    	System.arraycopy( Dialog, 0, VillagerDialog, 0, Dialog.length );
+    	VillagerName = name; 
+  
     }
 
-    /**
-     * 
-     */
-    private String dialogue;
-
-    /**
-     * 
-     */
-    public String name;
-
-    /**
-     * @return
-     */
-    public void talk() {
-        // TODO implement here
-        return null;
+    public String getName() 
+    {
+        return VillagerName; 
     }
-
-    /**
-     * @param otherObj 
-     * @return
-     */
-    public boolean withinRange(Interactable otherObj) {
-        // TODO implement here
-        return false;
+    
+    public String[] getDialog()
+    {
+    	return VillagerDialog;
     }
-
-    /**
-     * @return
-     */
-    public interactors enum getInteractors() {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param otherObj 
-     * @return
-     */
-    public void action(Interactable otherObj) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public String getName() {
-        // TODO implement here
-        return "";
-    }
+    
+    
 
 }

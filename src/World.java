@@ -18,6 +18,8 @@ public class World
 {
 	/**************** Attributes *********************/
 	
+	
+
 	/** The only player in the current version of our game. */
 	private Player player = null; 
 	
@@ -29,6 +31,8 @@ public class World
 	
 	/** The camera that follows the player. */
 	private Camera cam = null;
+	
+	private 
 
 	/***************** Methods ***********************/
 	
