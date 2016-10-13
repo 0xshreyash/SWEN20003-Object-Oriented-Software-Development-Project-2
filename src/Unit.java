@@ -59,6 +59,11 @@ public abstract class Unit extends Entity
 	{
 		maxDamage = newMaxDamage;
 	}
+	
+	public void setMaxCoolDown(int newMaxCoolDown)
+	{
+		maxCoolDown = newMaxCoolDown;
+	}
 
 
 	public int getCoolDown()

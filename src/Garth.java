@@ -26,7 +26,7 @@ public class Garth extends Villager implements Interactable
     	
     }
 
-    public Class<? extends Unit> getTag()
+    public Class<? extends Entity> getTag()
     {
     	return this.getClass();
     	

@@ -4,12 +4,12 @@ import java.util.*;
 /**
  * 
  */
-public class Bandits extends MonsterAggressive {
+public class Bandit extends MonsterAggressive {
 
     /**
      * Default constructor
      */
-    public Bandits() {
+    public Bandit() {
     }
 
 }

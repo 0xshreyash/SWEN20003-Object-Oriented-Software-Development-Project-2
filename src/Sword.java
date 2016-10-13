@@ -1,5 +1,4 @@
 
-import java.util.*;
 
 import org.newdawn.slick.SlickException;
 
@@ -42,7 +41,7 @@ public class Sword extends Item implements Interactable
 
 
 	
-	public Class<? extends Unit> getTag() {
+	public Class<? extends Entity> getTag() {
 		// TODO Auto-generated method stub
 		return this.getClass();
 	}

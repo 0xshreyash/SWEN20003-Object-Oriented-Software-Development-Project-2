@@ -1,33 +1,43 @@
 
 
 
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 
-public class Amulet extends Item
+/**
+ * 
+ */
+public class Amulet extends Item implements Interactable
 {
-	
-	public static int hpBonus; 
-	
-	
-	public Amulet(float starting_X, float starting_Y, String item_Image, String item_Name, int HP_BONUS) 
-	throws SlickException
-	{
-		super(starting_X, starting_Y, item_Image, item_Name);
-		hpBonus = HP_BONUS;	
-	}
-	
-	public void action(Interactable other)
-	{
-		if(this.getCollected() && this.isInteractor(other))
-		{
-			
-			other.action(this);
-		}
-		return;
-	}
-	
+	/**
+     * 
+     */
+    private int hpBoost;
 
+    /**
+     * Default constructor
+     */
+    public Amulet() 
+    throws SlickException
+    {
+    	super(Constant.AMULET_X, Constant.AMULET_Y, Constant.AMULET_PATH, Constant.AMULET);
+    	hpBoost = Constant.AMULET_BOOST;
+    }
+
+    public void action(Interactable other) 
+    {
+        if (this.isInteractor(other))
+        {
+        	Player collector = (Player)other;
+        	collector.setMaxHP(collector.getMaxHP() 
+        			+ hpBoost);
+        	collector.setHP(collector.getHP() + hpBoost);
+        }
+    }
+
+	public Class<? extends Entity> getTag() 
+	{
+		// TODO Auto-generated method stub
+		return this.getClass();
+	}
 
 }

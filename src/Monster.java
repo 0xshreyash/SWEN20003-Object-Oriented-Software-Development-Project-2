@@ -1,56 +1,52 @@
 
 import java.util.*;
 
+import org.newdawn.slick.SlickException;
+
 /**
  * 
  */
-public abstract class Monster extends Unit 
+public abstract  class Monster extends Unit
 {
 
-    
-
-    public Monster() 
-    {
-    	
-    }
-
-    /**
+	/**
      * 
      */
     private String name;
+    private boolean isDead;
 
-    /**
-     * @param other
-     * @return
-     */
-    public boolean withinRange(Interactable other) 
+    public Monster(String MonsterImagePath, float starting_X, float starting_Y,
+			int max_HP, float monster_speed, int max_Damage, int max_CoolDown, String MonsterName)
+    throws SlickException
     {
-        
-        return false;
+    	super(MonsterImagePath, starting_X, starting_Y,
+    		max_HP, monster_speed, max_Damage,max_CoolDown);
+    	MonsterName = name;
+    	isDead = false;
     }
 
-    /**
-     * @return
-     */
-    public interactors enum getInteractors() {
-        // TODO implement here
-        return null;
-    }
 
-    /**
-     * @param map 
-     * @param interactables 
-     * @param delta 
-     * @return
-     */
-    public abstract void update(Map map, ArrayList<Interactable> interactables, int delta);
+	public boolean isInteractor(Interactable other) 
+	{
+		return other instanceof Player;
+	}
 
-    /**
-     * @return
-     */
-    public String getName() {
-        // TODO implement here
-        return "";
-    }
+	public Class<? extends Entity> getTag() 
+	{
+		// TODO Auto-generated method stub
+		return this.getClass();
+	}
+	
+	public boolean getIsDead()
+	{
+		return isDead;
+		
+	}
+    
+	public void setIsDead(boolean change)
+	{
+		isDead = change;
+		return;
+	}
 
 }

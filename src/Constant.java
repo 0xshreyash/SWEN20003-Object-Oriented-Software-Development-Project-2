@@ -55,7 +55,7 @@ public class Constant
 	    
 	    public static final int SWORD_BOOST = 30; 
 	    
-	    public static final int ELIXIR_BOOST = -300; 
+	    public static final int TOME_BOOST = -300; 
 	    
 	    public static final float AMULET_X = 965;
 	    
