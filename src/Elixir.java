@@ -23,23 +23,19 @@ public class Elixir extends Item implements Interactable
     	
     }
 
-    
-
     /**
-     * @param otherObj 
+     * @param other
      * @return
      */
     public void action(Interactable other) 
     {
-        return;
+        if(other.identify() == InteractorTag.Player)
+        {
+        	((Player)other).takeItem(this);
+        	
+        }
     }
 
-
-	public Class<? extends Entity> getTag() 
-	{
-		// TODO Auto-generated method stub
-		return this.getClass();
-	}
 
 
 

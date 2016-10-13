@@ -35,12 +35,24 @@ public class PrinceAldric extends Villager
 		}
 		
 	}
-
-    public Class<? extends Entity> getTag()
+    
+    public void talkTo(Player player)
     {
-    	return this.getClass();
+    	this.setTalk(true);
     	
+    	if (!player.hasItem(Constant.AMULET)) {
+            activeLine = dialogues.get(0);
+        } else if (!player.hasItem(Constants.SWORD)) {
+            activeLine = dialogues.get(1);
+        } else if (!player.hasItem(Constants.TOME)) {
+            activeLine = dialogues.get(2);
+        } else {
+            activeLine = dialogues.get(3);
+        }
     }
+    
+    
+   
 
 	
 

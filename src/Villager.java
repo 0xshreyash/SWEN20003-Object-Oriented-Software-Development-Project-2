@@ -14,7 +14,18 @@ public abstract class Villager extends Unit implements Interactable
 
     private String VillagerDialog[]; 
     private boolean talk;
-    private String currentlySaying;
+    
+    public boolean isTalk() 
+    {
+		return talk;
+	}
+
+	public void setTalk(boolean talk) 
+	{
+		this.talk = talk;
+	}
+
+	private String currentlySaying;
     
     public String getCurrentlySaying() 
     {

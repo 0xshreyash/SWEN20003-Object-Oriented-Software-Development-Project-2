@@ -8,6 +8,8 @@
  * in the program.
  */
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -58,17 +60,23 @@ public class Player extends Unit implements Interactable
 		}
 		
 	}
+	
+	 public ArrayList<Item> getItems() {
+	        return inv.getItems();
+	    }
 
-	@Override
-	public boolean isInteractor(Interactable other) {
-		// TODO Auto-generated method stub
-		return (other instanceof MonsterAggressive)||(other instanceof MonsterPassive)
-				||(other instanceof Item)||(other instanceof Villager);
-	}
+	    public boolean hasItem(String itemName) {
+	        for (Item item : getItems())
+	            if (item.equals(itemName))
+	                return true;
+	        return false;
+	    }
 
-	@Override
-	public Class<? extends Unit> getTag() {
-		// TODO Auto-generated method stub
-		return this.getClass();
-	}
+	    public void takeItem(String itemName) throws SlickException {
+	        bag.takeItem(itemName);
+	    }
+
+	    public void takeItem(Item... item) {
+	        bag.addItem(item);
+	    }
 }

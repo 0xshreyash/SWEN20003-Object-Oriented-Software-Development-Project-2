@@ -198,7 +198,7 @@ public class Constant
 	    public static final float GarthX = 756;
 	    public static final float GarthY = 870;
 	    
-	    publci static final int VILLAGER_SPEECH_TIME = 4000;
+	    public static final int VILLAGER_SPEECH_TIME = 4000;
 	    
 	    /** Player related constants */
 	    

@@ -1,5 +1,4 @@
 
-import java.util.*;
 
 import org.newdawn.slick.SlickException;
 
@@ -24,30 +23,14 @@ public class Tome extends Item implements Interactable
     }
 
     
-
-    /**
-     * @param otherObj 
-     * @return
-     */
     public void action(Interactable other) 
     {
-        if (this.isInteractor(other))
-        {
-        	Player collector = (Player)other;
-        	collector.setMaxCoolDown(collector.getMaxCoolDown() 
-        		+ coolDownBoost );
+        if(other.identify() == InteractorTag.Player)
+        {	
+        	((Player)other).takeItem(this);
+        	((Player)other).setMaxCoolDown(((Player)other).getMaxCoolDown() + coolDownBoost);
+        		
         }
     }
-
-
-
-	
-	public Class<? extends Entity> getTag() {
-		// TODO Auto-generated method stub
-		return this.getClass();
-	}
-
-
-
 
 }

@@ -3,6 +3,7 @@
 
 import org.newdawn.slick.SlickException;
 
+
 /**
  * 
  */
@@ -25,19 +26,15 @@ public class Amulet extends Item implements Interactable
 
     public void action(Interactable other) 
     {
-        if (this.isInteractor(other))
+        if(other.identify() == InteractorTag.Player)
         {
-        	Player collector = (Player)other;
-        	collector.setMaxHP(collector.getMaxHP() 
-        			+ hpBoost);
-        	collector.setHP(collector.getHP() + hpBoost);
+        	
+        	((Player)other).takeItem(this);
+        	((Player)other).setMaxHP(((Player)other).getMaxHP() + hpBoost);
+        	((Player)other).setHP(((Player)other).getHP() + hpBoost);
+        	
         }
     }
 
-	public Class<? extends Entity> getTag() 
-	{
-		// TODO Auto-generated method stub
-		return this.getClass();
-	}
 
 }

@@ -2,6 +2,7 @@
 
 import org.newdawn.slick.SlickException;
 
+
 /**
  * 
  */
@@ -24,28 +25,16 @@ public class Sword extends Item implements Interactable
 
     
 
-    /**
-     * @param otherObj 
-     * @return
-     */
     public void action(Interactable other) 
     {
-        if (this.isInteractor(other))
+        if(other.identify() == InteractorTag.Player)
         {
-        	Player collector = (Player)other;
-        	collector.setMaxDamage(collector.getMaxDamage() 
-        			+ damageBoost);
+        	
+        	((Player)other).takeItem(this);
+        	((Player)other).setMaxDamage(((Player)other).getMaxDamage() + damageBoost);
+        	
         }
     }
-
-
-
-	
-	public Class<? extends Entity> getTag() {
-		// TODO Auto-generated method stub
-		return this.getClass();
-	}
-
 
 
 
