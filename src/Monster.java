@@ -1,52 +1,82 @@
 
-import java.util.*;
-
+import java.util.*; 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-/**
- * 
- */
+
 public abstract  class Monster extends Unit
 {
+	private boolean underAttack; 
+	private float deltaSinceBeingAttacked;
+	private Interactable adversary;
+	
+    public Interactable getAdversary() 
+    {
+		return adversary;
+	}
 
-	/**
-     * 
-     */
-    private String name;
-    private boolean isDead;
+	public void setAdversary(Interactable adversary) 
+	{
+		this.adversary = adversary;
+	}
 
-    public Monster(String MonsterImagePath, float starting_X, float starting_Y,
+	public float getDeltaSinceBeingAttacked() 
+    {
+		return deltaSinceBeingAttacked;
+	}
+
+	public void setDeltaSinceBeingAttacked(float delta) 
+	{
+		this.deltaSinceBeingAttacked += delta;
+	}
+
+	public Monster(String MonsterImagePath, float starting_X, float starting_Y,
 			int max_HP, float monster_speed, int max_Damage, int max_CoolDown, String MonsterName)
     throws SlickException
     {
     	super(MonsterImagePath, starting_X, starting_Y,
-    		max_HP, monster_speed, max_Damage,max_CoolDown);
-    	MonsterName = name;
-    	isDead = false;
+    		max_HP, monster_speed, max_Damage,max_CoolDown, MonsterName);
+    	underAttack = false; 
+    	deltaSinceBeingAttacked = 0f;
+    	adversary = null;
     }
-
-
-	public boolean isInteractor(Interactable other) 
-	{
-		return other instanceof Player;
+    
+    public boolean isUnderAttack() 
+    {
+		return underAttack;
 	}
 
-	public Class<? extends Entity> getTag() 
+	public void setUnderAttack(boolean underAttack) 
 	{
-		// TODO Auto-generated method stub
-		return this.getClass();
+		this.underAttack = underAttack;
 	}
+
+	public void render(Graphics g)
+    {
+    	if(!isDead())
+    	{
+    		renderHealthBar(g);
+    		if(this.isFacingRight())
+    		{
+    			this.getImage().drawCentered(this.getxPos(), this.getyPos());
+    			
+    		}
+    		else
+    		{
+    			this.getImageInverted().drawCentered(this.getxPos(), this.getyPos());
+    		}
+    	}
+    }
 	
-	public boolean getIsDead()
+	public float getDistance(Interactable other)
 	{
-		return isDead;
-		
+	    return (float)Math.sqrt((double)getPos().distanceSquared(other.getPos()));
 	}
     
-	public void setIsDead(boolean change)
-	{
-		isDead = change;
-		return;
-	}
+   
+    
+    
+
+
 
 }

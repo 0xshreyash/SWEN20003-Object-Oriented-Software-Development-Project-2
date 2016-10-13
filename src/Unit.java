@@ -8,43 +8,46 @@
  * in the program.
  */
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+
 public abstract class Unit extends Entity
 {
-	/** Max HP of the Unit */ 
-	private int maxHP;
-	/** HP of the Unit */
-	private int HP; 
-	
-	/** Image of the unit. */
 	private Image unit_image = null; 
-	/** Inverted image of the unit. */
 	private Image unit_image_inverted = null;
-	
-	boolean facing_right = true;
-	
-	/** Speed of the unit */
-	private final float speed;
-
-	/** Max damage caused by the Unit */ 
+	private int maxHP;
+	private int HP; 
+	private String name;
+	private float speed;
 	private  int maxDamage;
-	
-	/** Max coolDown time of the Unit */
 	private int maxCoolDown;
-	/** coolDown time of the Unit */
 	private int coolDown; 
+	private boolean facing_right = true;
+	private boolean isDead = false; 
 	
-	private boolean isDead = false;
-	
-	
-	public int getHP() 
+	/** Creates the Unit object.  
+     */
+	public Unit(String UnitImagePath, float starting_X, float starting_Y,
+			int max_HP, float unit_speed, int max_Damage, int max_CoolDown, String unitName) 
+	throws SlickException
 	{
-		return HP;
+		
+		super(starting_X, starting_Y);
+		unit_image = new Image(UnitImagePath);
+		unit_image_inverted = unit_image.getFlippedCopy(true, false);
+		maxHP = max_HP; 
+		speed = unit_speed; 
+		maxDamage = max_Damage; 
+		maxCoolDown = max_CoolDown; 
+		name = unitName;
+		HP = maxHP;
+		
 	}
-
+	
+	
 	public void setHP(int hP) 
 	{
 		HP = hP;
@@ -65,25 +68,66 @@ public abstract class Unit extends Entity
 		maxCoolDown = newMaxCoolDown;
 	}
 
-
-	public int getCoolDown()
+	public void setSpeed(float newSpeed)
 	{
-		return coolDown;
+		speed = newSpeed;
 	}
+	
 
 	public void setCoolDown(int coolDown) 
 	{
 		this.coolDown = coolDown;
+	}
+	
+	public void setName(String newName)
+	{
+		name = newName;
+	}
+	
+	public void changeFace()
+	{
+		facing_right = !facing_right;
+	}
+	
+	
+	public void setDead(boolean isDead) 
+	{
+		this.isDead = isDead;
+		
+		if(!isDead)
+		{
+			HP = maxHP;
+		}
 	}
 
 	public boolean isDead() 
 	{
 		return isDead;
 	}
-
-	public void setDead(boolean isDead) 
+	
+	public boolean isFacingRight()
 	{
-		this.isDead = isDead;
+		return facing_right;
+	}
+	
+	
+	
+	
+	
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public int getCoolDown()
+	{
+		return coolDown;
+	}
+	
+	public int getHP() 
+	{
+		return HP;
 	}
 
 	public int getMaxHP() 
@@ -106,27 +150,18 @@ public abstract class Unit extends Entity
 		return maxCoolDown;
 	}
 	
-    /** Creates the player object.  
-     * @param playerImagePath - the path to the file containing the image
-     * of the player.
-     */
-	public Unit(String UnitImagePath, float starting_X, float starting_Y,
-			int max_HP, float unit_speed, int max_Damage, int max_CoolDown) 
-	throws SlickException
+	public Image getImage()
 	{
-		
-		super(starting_X, starting_Y);
-		
-		/* Assigning the player and inverted player image. */
-		unit_image = new Image(UnitImagePath);
-		unit_image_inverted = unit_image.getFlippedCopy(true, false);
-		maxHP = max_HP; 
-		speed = unit_speed; 
-		maxDamage = max_Damage; 
-		maxCoolDown = max_CoolDown; 
-		
+		return unit_image;
 	}
 	
+	public Image getImageInverted()
+	{
+		return unit_image_inverted;
+	}
+	
+	
+
 	/** Updates the position of the player in order to render it.
 	 * @param map - The Map object we use to see if the tile is
 	 * blocking or not. 
@@ -135,74 +170,74 @@ public abstract class Unit extends Entity
 	 * @param delta - the time elapsed since the last update.
 	 * @return - void.
 	 */
-	public void update(Map map, float dir_x, float dir_y, int delta)
-	{
+	//public void update(Map map, float dir_x, float dir_y, int delta)
+	//{
 		/* Prospective x and y-coordinates computed */
-		float new_xPos  = this.getxPos() + dir_x*speed* delta; 
-		float new_yPos =  this.getyPos() + dir_y*speed* delta; 
+		/*float new_xPos  = this.getxPos() + dir_x*speed* delta; 
+		float new_yPos =  this.getyPos() + dir_y*speed* delta;*/ 
 		
 		/* Check for blocking of the player by certain tiles and 
 		 * halt movement if a certain tile blocks. 
 		 */
 		/* Update only the yPos if the xPos caused the blocking. */ 
-		if(map.blocks(new_xPos, new_yPos) && !map.blocks(this.getxPos(), new_yPos))
-		{
+		//if(map.blocks(new_xPos, new_yPos) && !map.blocks(this.getxPos(), new_yPos))
+		//{
 			
 			/* Making sure the new y-position is on the game board. */
-			if(!((int)Math.floor(new_yPos) <= Constant.min_Y
-			 || (int)Math.ceil(new_yPos) >= Constant.gameheight))
-			{
-				this.setxPos(new_yPos); 
-			}	 
-		}
+			//if(!((int)Math.floor(new_yPos) <= Constant.min_Y
+			 //|| (int)Math.ceil(new_yPos) >= Constant.gameheight))
+			//{
+				//this.setxPos(new_yPos); 
+			//}	 
+		//}
 		/* Update only the xPos if the yPos is causing the blocking. */
-		else if(map.blocks(new_xPos, new_yPos) && !map.blocks(new_xPos, getyPos()))
-		{
+		//else if(map.blocks(new_xPos, new_yPos) && !map.blocks(new_xPos, getyPos()))
+		//{
 			
 			/* Making sure the new x-position is on the game board. */
-			if(!((int)Math.floor(new_xPos) <= Constant.min_X
-			 || (int)Math.ceil(new_xPos) >= Constant.gamewidth))
-			{
-				this.setxPos(new_xPos);; 
-			}
-		}
+			//if(!((int)Math.floor(new_xPos) <= Constant.min_X
+			 //|| (int)Math.ceil(new_xPos) >= Constant.gamewidth))
+			//{
+				//this.setxPos(new_xPos);; 
+			//}
+		//}
 		/* Update both if none of the xPos and yPos cause blocking. */
-		else if(!map.blocks(new_xPos, new_yPos))
-		{
+		//else if(!map.blocks(new_xPos, new_yPos))
+		//{
 			/* Making sure the new x-position is on the game board. */
-			if(!((int)Math.floor(new_xPos) <= Constant.min_X
-			 || (int)Math.ceil(new_xPos) >= Constant.gamewidth))
-			{
-				this.setxPos(new_xPos);; 
-			}
+			//if(!((int)Math.floor(new_xPos) <= Constant.min_X
+			 //|| (int)Math.ceil(new_xPos) >= Constant.gamewidth))
+			//{
+				//this.setxPos(new_xPos);; 
+			//}
 			/* Making sure the new y-position is on the game board. */
-			if(!((int)Math.floor(new_yPos) <= Constant.min_Y
-			 || (int)Math.ceil(new_yPos) >= Constant.gameheight))
-			{
-				this.setxPos(new_yPos);
-			}	
-		}	
+			//if(!((int)Math.floor(new_yPos) <= Constant.min_Y
+			 //|| (int)Math.ceil(new_yPos) >= Constant.gameheight))
+			//{
+				//this.setxPos(new_yPos);
+			//}	
+		//}	
 		/* Check which side the player is facing. */
-		if(dir_x > 0)
-		{
-			this.facing_right = true; 
-		}
-		else if(dir_x < 0)
-		{
-			this.facing_right = false; 
-		}	
-	}
+		//if(dir_x > 0)
+		//{
+			//this.facing_right = true; 
+		//}
+		//else if(dir_x < 0)
+		//{
+			//this.facing_right = false; 
+		//}	
+	//}
 	
 	
-	public void render(Graphics g, float cam_minX, float cam_minY)
-	{
+	//public void render(Graphics g, float cam_minX, float cam_minY)
+	//{
 		/* Using translate to make sure the player is printed on 
 		 * the screen. */
 		//g.translate(-(float)cam_minX, -(float)cam_minY);
 		
 		/* Draw the player on the screen based on the side (s)he is 
 		 * facing. */
-		if (this.getxPos() >= cam_minX && this.getyPos() >= cam_minY)
+		/*if (this.getxPos() >= cam_minX && this.getyPos() >= cam_minY)
 		{
 			if(this.facing_right)
 			{
@@ -213,13 +248,38 @@ public abstract class Unit extends Entity
 				unit_image_inverted.drawCentered(this.getxPos(), this.getyPos());
 			}	
 		}
-	}
+	}*/
 	
 	
-    public float distance(float x2, float y2)
+  /* public float distance(float x2, float y2)
     {
     	return (float)(Math.sqrt((float)(Math.pow(this.getxPos()-x2, 2) + 
     			Math.pow(this.getyPos()-y2, 2))));
-    }
+    }*/
+	
+	public void renderHealthBar(Graphics g)
+	{
+        Color LABEL = new Color(0.9f, 0.9f, 0.4f);          // Gold
+        Color VALUE = new Color(1.0f, 1.0f, 1.0f);          // White
+        Color BAR_BG = new Color(0.0f, 0.0f, 0.0f, 0.8f);   // Black, transp
+        Color BAR = new Color(0.8f, 0.0f, 0.0f, 0.8f);      // Red, transp
+        
+        int healthBarHeight = Constant.BAR_HEIGHT;
+        int healthBarWidth = Math.max(g.getFont().getWidth(name) + Constant.ADD_TO_FONT_WIDTH, -Constant.BAR_Y_OFFSET);
+        
+        float adj_x = this.getxPos() + Constant.BAR_X_OFFSET;
+        float adj_y = this.getyPos() + Constant.BAR_Y_OFFSET;
+    
+        g.setColor(BAR_BG);
+        g.fillRect(adj_x, adj_y, healthBarWidth, healthBarHeight);
+        
+        float health_percentage = ((float)(this.getHP())/this.getMaxHP())*100f;
+        g.setColor(BAR);
+        g.fillRect(adj_x, adj_y, health_percentage, healthBarHeight);
+		
+     
+        g.setColor(VALUE);
+        g.drawString(name, adj_x, adj_y);
+	}
 
 }

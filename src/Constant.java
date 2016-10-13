@@ -73,6 +73,12 @@ public class Constant
 	    
 	    public static final float ELIXIR_Y =  402;
 	    
+	    public static final int PANEL_HEIGHT  = 20;
+	    
+	    public static final int PANEL_Y_OFFSET  = -70;
+	    
+	    public static final int PANEL_X_OFFSET = -20;
+	    
 	    /** Monster related constants */
 	    
 	    public static final String SKELETON_PATH = "units/skeleton.png";
@@ -130,6 +136,10 @@ public class Constant
 	    public static final int SkeletonCooldown = 500;
 	    
 	    public static final int DraelicCooldown = 400;
+	    
+	    public static final int TIME_TO_CHANGE_DIRECTION = 3000;
+	    
+	    public static final int TIME_TO_SAFETY = 5000;
 	    		
 	    /** Screen width, in pixels. */
 	    public static final int screenwidth = 800;
@@ -188,6 +198,8 @@ public class Constant
 	    public static final float GarthX = 756;
 	    public static final float GarthY = 870;
 	    
+	    publci static final int VILLAGER_SPEECH_TIME = 4000;
+	    
 	    /** Player related constants */
 	    
 	    public static final String PLAYER_PATH = "units/player.png";
@@ -215,9 +227,13 @@ public class Constant
 	    /** Follow range */
 	    public static final float FOLLOW_RANGE = 150f; 
 	    
-	    public static final float ATTACK_RANGE = 50f;
+	    public static final float COLLIDE_RANGE = 50f;
 	    
-	    public static final float BAR_WIDTH = 20f; 
+	    public static final int BAR_HEIGHT        = 20;
+	    public static final int BAR_Y_OFFSET      = -70;
+	    public static final int BAR_X_OFFSET      = -20;
+	    
+	    public static final int ADD_TO_FONT_WIDTH = 6;
 	    
 	    public static final float PIXEL_CHAR = 9.5f;
 	    

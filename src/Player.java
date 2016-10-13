@@ -14,7 +14,7 @@ import org.newdawn.slick.SlickException;
 
 public class Player extends Unit implements Interactable
 {
-
+	private boolean talk;
     /** Creates the player object.  
      * @param playerImagePath - the path to the file containing the image
      * of the player.
@@ -25,7 +25,8 @@ public class Player extends Unit implements Interactable
 		//String UnitImagePath, float starting_X, float starting_Y,
 		//int max_HP, float unit_speed, int max_Damage, int max_CoolDown
 		super(Constant.PLAYER_PATH, Constant.player_starting_X, Constant.player_starting_Y, 
-				Constant.PlayerHP, Constant.PLAYER_SPEED, Constant.PlayerDamage, Constant.PlayerCooldown);	
+				Constant.PlayerHP, Constant.PLAYER_SPEED, Constant.PlayerDamage, Constant.PlayerCooldown, Constant.PLAYER);
+		talk = false;
 		
 	}
 	
@@ -39,14 +40,22 @@ public class Player extends Unit implements Interactable
 	 */
 	public void update(Map map, float dir_x, float dir_y, int delta, int attack, int talk)
 	{
-		super.update(map, dir_x, dir_y, delta);	
+		
 		
 	}
-
+	
+	public boolean isTalking()
+	{
+		return talk;
+	}
+	
 
 	public void action(Interactable other) 
 	{
-		
+		if(this.isInteractor(other))
+		{
+			
+		}
 		
 	}
 

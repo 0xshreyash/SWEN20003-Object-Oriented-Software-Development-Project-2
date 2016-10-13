@@ -4,10 +4,12 @@ import java.util.*;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import Interactable.InteractorTag;
+
 /**
  * 
  */
-public class PrinceAldric extends Villager implements Interactable
+public class PrinceAldric extends Villager
 {
 
     /**
@@ -20,11 +22,19 @@ public class PrinceAldric extends Villager implements Interactable
     		 Constant.AldricSays, Constant.PRINCE);
     }
     
-    public void action()
-    {
-    	String []Dialog = this.getDialog();
-    	
-    }
+    @Override
+	public void action(Interactable other) 
+	{
+		if(other.identify() == InteractorTag.Player && talk == false)
+		{
+			if(((Player)other).isTalking())
+			{
+				talkTo((Player)other);
+			}
+			
+		}
+		
+	}
 
     public Class<? extends Entity> getTag()
     {
@@ -33,9 +43,7 @@ public class PrinceAldric extends Villager implements Interactable
     }
 
 	
-	public void action(Interactable other)
-	{
-		
-		
-	}
+
+	
+	
 }

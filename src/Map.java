@@ -35,11 +35,11 @@ public class Map extends TiledMap
 	 * @param player_y - new y-coordinate of the player.
 	 * @return true if tile is blocking else false. 
 	 */
-	public boolean blocks(double player_x, double player_y)
+	public boolean blocks(float x, float y)
     {
     	/* Finding which tile we check blocking for */
-    	int x_tile = (int)(player_x/this.getTileWidth()); 
-    	int y_tile = (int)(player_y/this.getTileHeight()); 
+    	int x_tile = (int)(x/this.getTileWidth()); 
+    	int y_tile = (int)(y/this.getTileHeight()); 
  
     	boolean isBlocking = false;
     	
