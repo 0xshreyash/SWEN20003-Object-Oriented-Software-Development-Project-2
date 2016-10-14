@@ -5,33 +5,45 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-
-/**
- * 
- */
 public abstract class Villager extends Unit implements Interactable
 {
-
+	/** Setting the class variables
+	 */
     private String VillagerDialog[]; 
     private boolean talk;
     
+    /** Checking if a villager is talking
+     * @return boolean of the talking state
+     */
     public boolean isTalking() 
     {
 		return talk;
 	}
 
+    /** Setting the dialogue of a village
+     * @param talk is the dialogue
+     */
 	public void setTalk(boolean talk) 
 	{
 		this.talk = talk;
 	}
 
+	/** What a villager is saying now
+	 */
 	private String currentlySaying;
     
+	/** Getter for the current dialogue
+	 * @return the current dialogue
+	 */
     public String getCurrentlySaying() 
     {
 		return currentlySaying;
 	}
     
+    /** Returns the dialogue of the index
+     * @param index the position of the required dialog
+     * @return the dialog at required position
+     */
     public String dialogAtIndex(int index)
     {
     	if (index >= VillagerDialog.length)
@@ -39,14 +51,26 @@ public abstract class Villager extends Unit implements Interactable
     	else return VillagerDialog[index];
     }
 
+    /** Setter for the current dialogue
+     * @param currentlySaying what the character is saying now
+     */
 	public void setCurrentlySaying(String currentlySaying) 
 	{
 		this.currentlySaying = currentlySaying;
 	}
 
+	/** Setting the length of a speech for a villager
+	 */
 	private double speechDuration;
     
-   
+   /** Constructor for this class
+    * @param VillagerImagePath directory where the image of the villager is located
+    * @param starting_X satring x position
+    * @param starting_Y starting y position
+    * @param Dialog is the dialogue for the villager
+    * @param VillagerName name of the villager
+    * @throws SlickException 
+    */
     public Villager(String VillagerImagePath, float starting_X, float starting_Y,
 			 String []Dialog, String VillagerName) 
     throws SlickException
@@ -63,6 +87,8 @@ public abstract class Villager extends Unit implements Interactable
    
 
 	@Override
+	/** Checking if a unit is within reach of the player
+	 */
 	public boolean isWithinRange(Interactable other) 
 	{
 		
@@ -70,6 +96,8 @@ public abstract class Villager extends Unit implements Interactable
 	}
 
 	@Override
+	/**
+	 */
 	public boolean isSame(Object other) 
 	{
 		if(other == null || other.getClass() != this.getClass())
@@ -81,6 +109,8 @@ public abstract class Villager extends Unit implements Interactable
 		
 	}
 
+	/** Setter of whether a unit is dead or not
+	 */
 	private void setIfDead()
 	{
 		if(this.getHP() <= 0)
@@ -88,6 +118,8 @@ public abstract class Villager extends Unit implements Interactable
 	}
 
 	@Override
+	/** Updating the map with the units that are dead and whether any dialogue was said
+	 */
 	public void update(Map map, int delta)
 	{
 		setIfDead();
@@ -103,6 +135,9 @@ public abstract class Villager extends Unit implements Interactable
 	}
 
 	@Override
+	/** Rendering the screen with the new state of the world
+	 * 	Checking for dialogue and life state of the unit  
+	 */
 	public void render(Graphics g) 
 	{
 		this.renderHealthBar(g);

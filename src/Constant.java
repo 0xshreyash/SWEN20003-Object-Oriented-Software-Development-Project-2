@@ -43,13 +43,13 @@ public abstract class Constant
 	    
 	    public static final String TOME_PATH = "/assets/items/tome.png";
 	    
-	    public static final String AMULET = "amulet";
+	    public static final String AMULET = "Amulet";
 	    
-	    public static final String ELIXIR = "elixir";
+	    public static final String ELIXIR = "Elixir";
 	    
-	    public static final String SWORD = "sword";
+	    public static final String SWORD = "Sword";
 	    
-	    public static final String TOME = "tome";
+	    public static final String TOME = "Tome";
 	    
 	    public static final int AMULET_BOOST = 80;
 	    
@@ -93,15 +93,15 @@ public abstract class Constant
 	    
 	    public static final String NECROMANCER_PATH = "/assets/units/necromancer.png";
 	    
-	    public static final String SKELETON = "skeleton";
+	    public static final String SKELETON = "Skeleton";
 	    
-	    public static final String ZOMBIE = "zombie";
+	    public static final String ZOMBIE = "Zombie";
 	    
-        public static final String BANDIT = "bandit";
+        public static final String BANDIT = "Bandit";
 	    
-	    public static final String DREADBAT = "dreadbat";
+	    public static final String DREADBAT = "Dreadbat";
 	  
-	    public static final String NECROMANCER = "necromancer";
+	    public static final String NECROMANCER = "Draelic";
 	    
 	    public static final int NumberOfBats = 30; 
 	    
@@ -173,9 +173,9 @@ public abstract class Constant
 	    /** Min y coordinate on the map. */
 	    public static final int min_Y = 0;
 	    
-		public static final float player_starting_X = 756; 
+		public static final float player_starting_X = 1960; 
 		/** Starting y-coordinate of the player. */
-		public static final float player_starting_Y = 684; 
+		public static final float player_starting_Y = 380; 
 	    
 	    public static final String ASSETS = "/assets/";
 	    /** Path to image of tiles from inside the assets folder. */
@@ -190,11 +190,11 @@ public abstract class Constant
 	    
 	    public static final String SHAMAN_PATH = "/assets/units/shaman.png"; 
 	    
-	    public static final String PEASANT = "peasant";
+	    public static final String PEASANT = "Garth";
 	    
-	    public static final String PRINCE = "prince";
+	    public static final String PRINCE = "Prince";
 	    
-	    public static final String SHAMAN = "elvira";
+	    public static final String SHAMAN = "Elvira";
 	    
 	    public static final int VillagerHP = 1;
 	    
