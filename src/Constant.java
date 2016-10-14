@@ -1,5 +1,5 @@
 // Add comments
-public class Constant 
+public abstract class Constant 
 {
 
 	    /* Things that will be common to all of the game */
@@ -35,13 +35,13 @@ public class Constant
 
 	    /** Item related constants */
 	    
-	    public static final String AMULET_PATH = "items/amulet.png";
+	    public static final String AMULET_PATH = "/assets/items/amulet.png";
 	    
-	    public static final String ELIXIR_PATH = "items/elixir.png";
+	    public static final String ELIXIR_PATH = "/assets/items/elixir.png";
 	    
-	    public static final String SWORD_PATH = "items/sword.png";
+	    public static final String SWORD_PATH = "/assets/items/sword.png";
 	    
-	    public static final String TOME_PATH = "items/tome.png";
+	    public static final String TOME_PATH = "/assets/items/tome.png";
 	    
 	    public static final String AMULET = "amulet";
 	    
@@ -73,23 +73,25 @@ public class Constant
 	    
 	    public static final float ELIXIR_Y =  402;
 	    
-	    public static final int PANEL_HEIGHT  = 20;
+	    public static final int PANEL_HEIGHT  = 70;
 	    
 	    public static final int PANEL_Y_OFFSET  = -70;
 	    
 	    public static final int PANEL_X_OFFSET = -20;
 	    
+	    public static final String PANEL_PATH = "/assets/panel.png";
+	    
 	    /** Monster related constants */
 	    
-	    public static final String SKELETON_PATH = "units/skeleton.png";
+	    public static final String SKELETON_PATH = "/assets/units/skeleton.png";
 	    
-	    public static final String ZOMBIE_PATH = "units/zombie.png";
+	    public static final String ZOMBIE_PATH = "/assets/units/zombie.png";
 	    
-        public static final String BANDIT_PATH = "units/bandit.png";
+        public static final String BANDIT_PATH = "/assets/units/bandit.png";
 	    
-	    public static final String DREADBAT_PATH = "units/dreadbat.png";
+	    public static final String DREADBAT_PATH = "/assets/units/dreadbat.png";
 	    
-	    public static final String NECROMANCER_PATH = "units/necromancer.png";
+	    public static final String NECROMANCER_PATH = "/assets/units/necromancer.png";
 	    
 	    public static final String SKELETON = "skeleton";
 	    
@@ -113,6 +115,13 @@ public class Constant
 	    
 	    public static final int BatHP = 40; 
 	    
+	    public static final float VERY_SMALL_DISTANCE = 0.0001f;
+	    
+	    public static final int posDirection = 1;
+	    
+	    public static final int negDirection = -1;
+	  
+	    
 	    public static final int ZombieHP = 60;
 	    
 	    public static final int BanditHP = 40; 
@@ -128,6 +137,10 @@ public class Constant
 	    public static final int SkeletonDamage = 16; 
 	    
 	    public static final int DraelicDamage = 30; 
+	    
+	    public static final int BatDamage = 0;
+	    
+	    public static final int BatCooldown = 0;
 	    
 	    public static final int ZombieCooldown = 800;
 	    
@@ -167,15 +180,15 @@ public class Constant
 	    public static final String ASSETS = "/assets/";
 	    /** Path to image of tiles from inside the assets folder. */
 	    
-	    public static final String TILES_IMG = "tiles.png";
+	    public static final String TILES_IMG = "/assets/tiles.png";
 	    
 	    /** Villager related constants */
 	    
-	    public static final String PEASANT_PATH = "units/peasant.png";
+	    public static final String PEASANT_PATH = "/assets/units/peasant.png";
 	    
-	    public static final String PRINCE_PATH = "units/prince.png";
+	    public static final String PRINCE_PATH = "/assets/units/prince.png";
 	    
-	    public static final String SHAMAN_PATH = "units/prince.png"; 
+	    public static final String SHAMAN_PATH = "/assets/units/shaman.png"; 
 	    
 	    public static final String PEASANT = "peasant";
 	    
@@ -202,7 +215,7 @@ public class Constant
 	    
 	    /** Player related constants */
 	    
-	    public static final String PLAYER_PATH = "units/player.png";
+	    public static final String PLAYER_PATH = "/assets/units/player.png";
 	    
 	    public static final String PLAYER = "player";
 	    
@@ -213,7 +226,7 @@ public class Constant
 	    public static final int PlayerCooldown = 600;
 	    
 	    /** Path to map.tmx from inside the assets folder. */
-	    public static final String MAP = "map.tmx";
+	    public static final String MAP = "/assets/map.tmx";
 	    
 	    /** Player speed */ 
 	    public static final float PLAYER_SPEED = 0.25f;
@@ -223,6 +236,8 @@ public class Constant
 	    
 	    /** Passive Monster speed */ 
 	    public static final float PA_MONSTER_SPEED = 0.20f;
+	    
+	    public static int OUT_OF_BOUNDS = -1;
 	    
 	    /** Follow range */
 	    public static final float FOLLOW_RANGE = 150f; 
@@ -250,4 +265,6 @@ public class Constant
 	        "Find the Sword of Strength - cross the bridge to the east, then head south.",
 	        "Find the Tome of Agility, in the Land of Shadows.",
 	        "You have found all the treasure I know of."};
+	    
+	    public static final int MAX_NO_OF_DIALOGS = 4;
 }

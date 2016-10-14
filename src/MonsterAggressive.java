@@ -1,16 +1,16 @@
 
-import java.util.*;
 
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Vector2f;
+
+import org.newdawn.slick.SlickException; 
 
 
 
 /**
  * 
  */
-public abstract class MonsterAggressive extends Monster implements Interactable
+public class MonsterAggressive extends Monster implements Interactable
 {
+	/* Help keep track of the state */
 	private boolean isAttacking;
 	private boolean isIdle;
 	private boolean isChasing;
@@ -26,15 +26,14 @@ public abstract class MonsterAggressive extends Monster implements Interactable
     	super(MonsterImagePath, starting_X, starting_Y,
     			max_HP, monster_speed, max_Damage, max_CoolDown, MonsterName);
     	// Can attack from the get go
-    	this.setCoolDown(0);
     	isAttacking = false;
     	isIdle = true; 
-    	isChasing = false;
+    	isChasing = false;   
     	
     	
     }
     
-    public InteractorTag identifier()
+    public InteractorTag identify()
     {
     	return InteractorTag.MonsterAggressive;
     }
@@ -46,16 +45,27 @@ public abstract class MonsterAggressive extends Monster implements Interactable
      */
     public void action(Interactable other) 
     {
-    	this.setAdversary(other);
-        if(this.getDistance(other) <= Constant.COLLIDE_RANGE)
-        {
-        	isAttacking = true; 
-        	if(this.getCoolDown() <= 0 && other.identify() == InteractorTag.Player)
-        	{
-        		
-        	}
-        	
-        }
+    	if(other.identify() == InteractorTag.Player)
+    	{
+    		this.setAdversary(other);
+	        if(this.getDistance(other) <= Constant.COLLIDE_RANGE)
+	        {
+	        	
+	        	if(this.getCoolDown() <= 0)
+	        	{
+	        		isAttacking = true; 
+	        		((Player)other).setHP(((Player)other).getHP() - (int)(Math.random()*this.getMaxDamage()));
+	        		this.setCoolDown(this.getMaxCoolDown());
+	        	}
+	        	
+	        }
+	        else if(this.getDistance(other) <= Constant.FOLLOW_RANGE)
+	        {
+	        	this.isChasing = true;
+	        }
+    	}
+        
+        
     }
 
     /**
@@ -66,38 +76,111 @@ public abstract class MonsterAggressive extends Monster implements Interactable
      */
     public void update(Map map, int delta)
     {
-    	if(this.getHP() <= 0)
-    			this.setDead(true);
+    	this.setDead();
+    	if(this.isDead())
+    		return;
     	
     	if(!this.isDead())
     	{
     		this.setCoolDown(this.getCoolDown() - delta);
     		
-    		if(this.getDistance(this.getAdversary()) <= Constant.FOLLOW_RANGE)
+    		if(this.getAdversary()!= null && this.getDistance(this.getAdversary()) <= Constant.FOLLOW_RANGE &&
+    				this.getDistance(this.getAdversary()) > Constant.COLLIDE_RANGE)
     		{
-    			isChasing = true; 
-    			isIdle = false; 
+    			if(this.getAdversary().identify() == InteractorTag.Player)
+    			{
+	    			isChasing = true; 
+	    			isIdle = false; 
+	    			isAttacking = false;
+	    			this.setUnderAttack(false);
+	    			float distTotal = 0, dX, dY;
+	    	    	distTotal = (float) Math.sqrt((float)(Math.pow(((Player)this.getAdversary()).getxPos() - this.getxPos(), 2) 
+	    	    			+ Math.pow(((Player)this.getAdversary()).getyPos() - this.getyPos(), 2)));
+	    	    	dX = ((((Player)this.getAdversary()).getxPos() - this.getxPos())/distTotal) * delta * this.getSpeed();
+	    	    	dY = ((((Player)this.getAdversary()).getyPos() - this.getyPos())/distTotal) * delta * this.getSpeed();
+	    	    	//Vector2f moveIn = this.getAdversary().getPos().sub(this.getPos()).getNormal();
+	    	    	//Vector2f moveTowards = moveIn.copy().scale(this.getSpeed()*delta);
+	    			if(!map.blocks(this.getxPos() + dX, 
+	    					this.getyPos() + dY))
+	    			{
+	    				this.setxPos(this.getxPos() + dX);	
+	    				this.setyPos(this.getyPos() + dY);
+	    			}
+	    			else
+	    			{
+	    				isIdle = true;
+	    				isChasing = false; 
+	    				isAttacking = false;
+	    			} 
+    			}
+    		} 
+    		
+    		else
+    		{
+    			isIdle = true;
+    			isChasing = false;
     			isAttacking = false;
-    			this.setUnderAttack(false);
-    			Vector2f moveIn = this.getAdversary().getPos().sub(this.getPos());
-    			Vector2f moveTowards = moveIn.copy().scale(this.getSpeed()*delta);
-    			if(!map.blocks(this.getxPos() + moveTowards.getX(), this.getyPos() + moveTowards.getY()))
-    			{
-    				this.setPos(this.getPos().add(moveTowards));
-    				
-    			}
-    			else
-    			{
-    				this.setAdversary(null);
-    				isIdle = true;
-    				isChasing = false; 
-    				isAttacking = false;
-    			}
-    		
     		}
-    		
-    			
     	}
+    	return;
     }
+
+	
+
+	@Override
+	public boolean isSame(Object other) 
+	{
+		if(other == null || other.getClass() != this.getClass())
+		{
+			return false;
+		}
+		
+		return other == this;
+	}
+
+	@Override
+	public void update(Map map, float dir_x, float dir_y, int delta, int attack, int talk) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean isAttacking() {
+		
+		return isAttacking;
+	}
+
+	public void setAttacking(boolean isAttacking) 
+	{
+		this.isAttacking = isAttacking;
+	}
+
+	public boolean isIdle()
+	{
+		return isIdle;
+	}
+
+	public void setIdle(boolean isIdle) 
+	{
+		this.isIdle = isIdle;
+	}
+
+	public boolean isChasing() 
+	{
+		return isChasing;
+	}
+
+	public void setChasing(boolean isChasing) 
+	{
+		this.isChasing = isChasing;
+	}
+	
+	@Override
+	public boolean isWithinRange(Interactable other) 
+	{
+		return getDistance(other) <= Constant.COLLIDE_RANGE ||
+				getDistance(other) <= Constant.FOLLOW_RANGE;
+	}
+	
+
 
 }

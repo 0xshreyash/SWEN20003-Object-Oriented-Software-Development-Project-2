@@ -1,15 +1,11 @@
 
-import java.util.*;
 
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-
-import Interactable.InteractorTag;
 
 /**
  * 
  */
-public class PrinceAldric extends Villager
+public class PrinceAldric extends Villager implements Interactable
 {
 
     /**
@@ -25,7 +21,7 @@ public class PrinceAldric extends Villager
     @Override
 	public void action(Interactable other) 
 	{
-		if(other.identify() == InteractorTag.Player && talk == false)
+		if(other.identify() == InteractorTag.Player && this.isTalking() == false)
 		{
 			if(((Player)other).isTalking())
 			{
@@ -40,15 +36,14 @@ public class PrinceAldric extends Villager
     {
     	this.setTalk(true);
     	
-    	if (!player.hasItem(Constant.AMULET)) {
-            activeLine = dialogues.get(0);
-        } else if (!player.hasItem(Constants.SWORD)) {
-            activeLine = dialogues.get(1);
-        } else if (!player.hasItem(Constants.TOME)) {
-            activeLine = dialogues.get(2);
-        } else {
-            activeLine = dialogues.get(3);
-        }
+    	if(!player.hasItem(Constant.ELIXIR))
+    	{
+    		this.setCurrentlySaying(dialogAtIndex(0));
+    	}
+    	else
+    	{
+    		this.setCurrentlySaying(dialogAtIndex(1));
+    	}
     }
     
     

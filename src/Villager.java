@@ -1,5 +1,5 @@
 
-import java.util.*;
+
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -15,7 +15,7 @@ public abstract class Villager extends Unit implements Interactable
     private String VillagerDialog[]; 
     private boolean talk;
     
-    public boolean isTalk() 
+    public boolean isTalking() 
     {
 		return talk;
 	}
@@ -31,7 +31,13 @@ public abstract class Villager extends Unit implements Interactable
     {
 		return currentlySaying;
 	}
-
+    
+    public String dialogAtIndex(int index)
+    {
+    	if (index >= VillagerDialog.length)
+    		return null;
+    	else return VillagerDialog[index];
+    }
 
 	public void setCurrentlySaying(String currentlySaying) 
 	{
@@ -48,8 +54,8 @@ public abstract class Villager extends Unit implements Interactable
     	super(VillagerImagePath, starting_X, starting_Y
     			,Constant.VillagerHP, Constant.VillagerSpeed
     			,Constant.VillagerDamage, Constant.VillagerCooldown, VillagerName);
-    	
-    	System.arraycopy( Dialog, 0, VillagerDialog, 0, Dialog.length );
+    	VillagerDialog = new String[Constant.MAX_NO_OF_DIALOGS];
+    	System.arraycopy(Dialog, 0, VillagerDialog, 0, Dialog.length);
     	talk = false; 
     	speechDuration = 0;
   

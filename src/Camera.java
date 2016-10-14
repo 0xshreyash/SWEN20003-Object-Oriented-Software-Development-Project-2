@@ -38,10 +38,9 @@ public class Camera
      *  @param screenheight - the height of the screen that we should 
      *  display.
      */
-    public Camera(Player player, int screenwidth, int screenheight)
+    public Camera( int screenwidth, int screenheight)
     throws SlickException
     {   
-    	followUnit(player);
     	this.screenwidth = screenwidth; 
     	this.screenheight = screenheight; 
     }

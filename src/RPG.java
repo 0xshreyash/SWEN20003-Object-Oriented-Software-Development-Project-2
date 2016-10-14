@@ -58,17 +58,17 @@ public class RPG extends BasicGame
         int talk = 0; 
         
         if (input.isKeyDown(Input.KEY_DOWN))
-            dir_y += 1;
+            dir_y = 1;
         if (input.isKeyDown(Input.KEY_UP))
-            dir_y -= 1;
+            dir_y =- 1;
         if (input.isKeyDown(Input.KEY_LEFT))
-            dir_x -= 1;
+            dir_x =- 1;
         if (input.isKeyDown(Input.KEY_RIGHT))
-            dir_x += 1;
+            dir_x = 1;
         if(input.isKeyDown(Input.KEY_A))
-        		attack = 1;
+        	attack = 1;
         if(input.isKeyDown(Input.KEY_T))
-        		talk = 1;
+        	talk = 1;
         	
 
         // Let World.update decide what to do with this data.

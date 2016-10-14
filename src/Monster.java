@@ -1,16 +1,28 @@
-
-import java.util.*; 
+ 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 
-public abstract  class Monster extends Unit
+public abstract  class Monster extends Unit implements Interactable
 {
 	private boolean underAttack; 
 	private float deltaSinceBeingAttacked;
+	
+	/** Current adversary */
 	private Interactable adversary;
 	
-    public Interactable getAdversary() 
+	public Monster(String MonsterImagePath, float starting_X, float starting_Y,
+			int max_HP, float monster_speed, int max_Damage, int max_CoolDown, String MonsterName)
+    throws SlickException
+    {
+    	super(MonsterImagePath, starting_X, starting_Y,
+    		max_HP, monster_speed, max_Damage,max_CoolDown, MonsterName);
+    	underAttack = false;
+    	adversary = null;
+    	this.setCoolDown(0);
+    }
+    
+	public Interactable getAdversary() 
     {
 		return adversary;
 	}
@@ -25,22 +37,11 @@ public abstract  class Monster extends Unit
 		return deltaSinceBeingAttacked;
 	}
 
-	public void setDeltaSinceBeingAttacked(float delta) 
+	public void setDeltaSinceBeingAttacked(float newDelta) 
 	{
-		this.deltaSinceBeingAttacked += delta;
+		this.deltaSinceBeingAttacked = newDelta;
 	}
-
-	public Monster(String MonsterImagePath, float starting_X, float starting_Y,
-			int max_HP, float monster_speed, int max_Damage, int max_CoolDown, String MonsterName)
-    throws SlickException
-    {
-    	super(MonsterImagePath, starting_X, starting_Y,
-    		max_HP, monster_speed, max_Damage,max_CoolDown, MonsterName);
-    	underAttack = false; 
-    	deltaSinceBeingAttacked = 0f;
-    	adversary = null;
-    }
-    
+	
     public boolean isUnderAttack() 
     {
 		return underAttack;
@@ -50,27 +51,41 @@ public abstract  class Monster extends Unit
 	{
 		this.underAttack = underAttack;
 	}
-
+	
+	@Override
 	public void render(Graphics g)
     {
-    	if(!isDead())
+    		
+    	if(!this.isDead())	
     	{
+    		this.getImage().drawCentered(this.getxPos(), this.getyPos());
+    		this.getImageInverted().drawCentered(this.getxPos(), this.getyPos());
     		renderHealthBar(g);
-    		if(this.isFacingRight())
-    		{
-    			this.getImage().drawCentered(this.getxPos(), this.getyPos());
-    			
-    		}
-    		else
-    		{
-    			this.getImageInverted().drawCentered(this.getxPos(), this.getyPos());
-    		}
     	}
+    
+    
     }
+	
+	@Override
+	public boolean isActive() 
+	{
+		return this.getHP() >= 0;
+	}
 	
 	public float getDistance(Interactable other)
 	{
 	    return (float)Math.sqrt((double)getPos().distanceSquared(other.getPos()));
+	}
+	
+	@Override
+	public boolean isWithinRange(Interactable other) 
+	{
+		return getDistance(other) <= Constant.COLLIDE_RANGE;
+	}
+	
+	public boolean canFollow(Interactable other)
+	{
+		return getDistance(other) <= Constant.FOLLOW_RANGE;
 	}
     
    

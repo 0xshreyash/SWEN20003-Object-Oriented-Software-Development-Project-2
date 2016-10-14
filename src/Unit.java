@@ -65,6 +65,7 @@ public abstract class Unit extends Entity
 	
 	public void setMaxCoolDown(int newMaxCoolDown)
 	{
+		
 		maxCoolDown = newMaxCoolDown;
 	}
 
@@ -76,7 +77,10 @@ public abstract class Unit extends Entity
 
 	public void setCoolDown(int coolDown) 
 	{
-		this.coolDown = coolDown;
+		if(coolDown >= 0)
+			this.coolDown = coolDown;
+		else
+			this.coolDown = 0;
 	}
 	
 	public void setName(String newName)
@@ -84,9 +88,20 @@ public abstract class Unit extends Entity
 		name = newName;
 	}
 	
-	public void changeFace()
+	public void changeFacing()
 	{
 		facing_right = !facing_right;
+	}
+	
+	public void face_right()
+	{
+		facing_right = true;
+		
+	}
+	
+	public void face_left()
+	{
+		facing_right = false;
 	}
 	
 	
@@ -99,7 +114,17 @@ public abstract class Unit extends Entity
 			HP = maxHP;
 		}
 	}
-
+	
+	public void setDead()
+	{
+		if(this.getHP() <= 0)
+			this.isDead = true;
+		else
+			this.isDead = false;
+		
+		return;
+	}
+		
 	public boolean isDead() 
 	{
 		return isDead;
@@ -111,10 +136,7 @@ public abstract class Unit extends Entity
 	}
 	
 	
-	
-	
-	
-	
+
 	public String getName()
 	{
 		return name;

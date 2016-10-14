@@ -1,8 +1,6 @@
 
-import java.util.*;
-
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+
 
 /**
  * 
@@ -20,21 +18,40 @@ public class Garth extends Villager implements Interactable
     		 Constant.GarthSays, Constant.PEASANT);
     }
     
-    public void action()
-    {
-    	String []Dialog = this.getDialog();
-    	
-    }
-
-    public Class<? extends Entity> getTag()
-    {
-    	return this.getClass();
-    	
-    }
-
-	
-	public void action(Interactable other)
+    @Override
+	public void action(Interactable other) 
 	{
+		if(other.identify() == InteractorTag.Player && this.isTalking() == false)
+		{
+			if(((Player)other).isTalking())
+			{
+				talkTo((Player)other);
+			}
+			
+		}
 		
 	}
+    
+    public void talkTo(Player player)
+    {
+    	this.setTalk(true);
+    	
+    	if(!player.hasItem(Constant.AMULET))
+    	{
+    		this.setCurrentlySaying(dialogAtIndex(0));
+    	}
+    	else if(!player.hasItem(Constant.SWORD))
+    	{
+    		this.setCurrentlySaying(dialogAtIndex(1));
+    	}
+    	else if(!player.hasItem(Constant.TOME))
+    	{
+    		this.setCurrentlySaying(dialogAtIndex(2));
+    	}
+    	else
+    	{
+    		this.setCurrentlySaying(dialogAtIndex(3));
+    	}
+    	return;
+    }
 }

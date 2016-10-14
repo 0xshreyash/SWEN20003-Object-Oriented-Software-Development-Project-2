@@ -7,8 +7,13 @@
  * This file contains the World class for our game. 
  */
 
-import org.newdawn.slick.Graphics; 
+import java.util.ArrayList;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;  
 import org.newdawn.slick.SlickException;
+
+
 
 /** Represents the entire game world.
  * (Designed to be instantiated just once for the whole game).
@@ -20,8 +25,9 @@ public class World
 	
 	
 
-	/** The only player in the current version of our game. */
-	private Player player = null; 
+
+	
+	private ArrayList<Interactable> interactables;
 	
 	/** The number of extra tiles we need in each direction */
 	private int extra_tiles = 2; 
@@ -32,6 +38,8 @@ public class World
 	/** The camera that follows the player. */
 	private Camera cam = null;
 	
+	private Player player = null; 
+
 
 	/***************** Methods ***********************/
 	
@@ -40,9 +48,78 @@ public class World
     throws SlickException
     {
     	/* Define the objects in the map. */
-    	this.player = new Player();
+    	this.interactables = new ArrayList<>();
+    	setUpInteractables();
+    	this.cam = new Camera(Constant.screenwidth, Constant.screenheight); 
     	this.map = new Map(Constant.MAP, Constant.ASSETS); 
-    	this.cam = new Camera(player, Constant.screenwidth, Constant.screenheight); 
+    	for(Interactable in : interactables)
+    	{
+    		if(in.identify() == Interactable.InteractorTag.Player)
+    		{
+    			System.out.println("There is a player");
+    			cam.followUnit((Player)in);
+    			player = (Player)in;
+    		}
+    	}
+    	
+    	
+    	
+    	
+    }
+    
+    public void setUpInteractables()
+    throws SlickException
+    {
+    	Player pl = new Player();
+    	interactables.add(pl); 
+    	int i;
+    	for(i = 0; i < Constant.NumberOfBats; i++)
+    	{
+    	
+    		this.interactables.add(new GiantBat(Constant.PassiveStartingX[i], 
+    				Constant.PassiveStartingY[i]));
+    	}
+    	int totalAggressive = Constant.NumberOfBandits + Constant.NumberOfDraelic
+    			+ Constant.NumberOfSkeleton + Constant.NumberOfZombies;
+    	
+    	for(i = 0; i < totalAggressive; i++)
+    	{
+    		if(i < Constant.NumberOfZombies)
+    		{
+    			interactables.add(new Zombie(Constant.AggressiveStartingX[i],
+    					Constant.AggressiveStartingY[i]));
+    		}
+    		else if(i < Constant.NumberOfBandits + Constant.NumberOfZombies)
+    		{
+    			interactables.add(new Bandit(Constant.AggressiveStartingX[i],
+    					Constant.AggressiveStartingY[i]));
+    		}
+    		else if(i < Constant.NumberOfBandits + Constant.NumberOfZombies  +
+    				Constant.NumberOfSkeleton)
+    		{
+    			interactables.add(new Skeleton(Constant.AggressiveStartingX[i],
+    					Constant.AggressiveStartingY[i]));
+    		}
+    
+    		else
+    		{
+    			interactables.add(new Draelic(Constant.AggressiveStartingX[i],
+    					Constant.AggressiveStartingY[i]));
+    			//break;
+
+    		}
+    	}
+    	
+    	interactables.add(new PrinceAldric());
+    	interactables.add(new Elvira());
+    	interactables.add(new Garth());
+    	
+    	interactables.add(new Amulet());
+    	interactables.add(new Sword());
+    	interactables.add(new Tome());
+    	interactables.add(new Elixir());
+    	
+ 
     }
     
     /** Update the game state for a frame.
@@ -51,14 +128,45 @@ public class World
      * @param delta Time passed since last frame (milliseconds).
      * @return void.
      */
-    public void update(float dir_x, float dir_y, int delta, int attack, int talk)
+    public void update(int dir_x, int dir_y, int delta, int attack, int talk)
     throws SlickException
     {
-    	/* Updating our camera and player. */
-        player.update(map, dir_x, dir_y, delta, attack, talk);
+    	for(Interactable in : interactables)
+    	{
+    		if(!(in.identify() == Interactable.InteractorTag.Player))
+    			in.update(map, delta);
+    	}
+    	interactions();
+    	player.update(map, dir_x, dir_y, delta, attack, talk);
         cam.update();
        
         return; 
+    }
+    
+    public void interactions()
+    {
+    	if(interactables == null)
+    		return;
+   
+    	 for (Interactable in : interactables)
+    	 {
+    
+    	     for (Interactable other : interactables)
+    	     {
+    	    	 if(other == null || in == null || other == in)
+    	    	 {
+    	    		 continue;
+    	    	 }
+    	    	 
+                if (other.identify() != in.identify() &&
+	                       in.isWithinRange(other))
+                {
+                	
+	                    in.action(other);
+                }
+    	     }
+    	 	
+    	}
     }
 
     /** Render the entire screen, so it reflects the current game state.
@@ -84,9 +192,106 @@ public class World
     	/* Rendering map and player. */
     	map.render(-start_pixel_x, -start_pixel_y, start_tile_x, start_tile_y, screen_width, screen_height);
     	g.translate(-(float)cam.getMinX(), -(float)cam.getMinY());
-    	player.render(g, this.cam.getMinX(), this.cam.getMinY());
+    	//player.render(g);
+    	for(Interactable in: interactables)
+    	{
+    		in.render(g);
+    	}
     	
+        renderPanel(g);
+    }
+    
+    /**
+     * Renders the player's status panel. (taken as-is from renderpanel.txt with only minor changes)
+     *
+     * @param g The current Slick graphics context.
+     */
+    public void renderPanel(Graphics g)
+    {
+        // Panel colours
+        Color LABEL = new Color(0.9f, 0.9f, 0.4f);          // Gold
+        Color VALUE = new Color(1.0f, 1.0f, 1.0f);          // White
+        Color BAR_BG = new Color(0.0f, 0.0f, 0.0f, 0.8f);   // Black, transp
+        Color BAR = new Color(0.8f, 0.0f, 0.0f, 0.8f);      // Red, transp
+
+        // Variables for layout
+        String text;                // Text to display
+        float text_x, text_y;         // Coordinates to draw text
+        float bar_x, bar_y;           // Coordinates to draw rectangles
+        float bar_width, bar_height;  // Size of rectangle to draw
+        float hp_bar_width;           // Size of red (HP) rectangle
+        float inv_x, inv_y;           // Coordinates to draw inventory item
+
+        float health_percent;       // Player's health, as a percentage
         
+        // Panel background image
+        player.getPlayerPanel().draw(cam.getMinX(), cam.getMinY() + Constant.screenheight - Constant.PANEL_HEIGHT);
+
+        // Display the player's health
+        text_x = cam.getMinX() + 15;
+        text_y = cam.getMinY() + Constant.screenheight - Constant.PANEL_HEIGHT + 25;
+        g.setColor(LABEL);
+        g.drawString("Health:", text_x, text_y);
+        text = player.getHP() + "/" + player.getMaxHP();                                 // TODO: HP / Max-HP
+
+        bar_x = cam.getMinX() + 90;
+        bar_y = cam.getMinY() + Constant.screenheight - Constant.PANEL_HEIGHT + 20;
+        bar_width = 90;
+        bar_height = 30;
+        health_percent = player.getHP()/(float)player.getMaxHP();                        // TODO: HP / Max-HP
+        hp_bar_width = (bar_width * health_percent);
+        text_x = bar_x + (bar_width - g.getFont().getWidth(text)) / 2;
+        
+        
+        
+        g.setColor(BAR_BG);
+        g.fillRect(bar_x, bar_y, bar_width, bar_height);
+        
+        g.setColor(BAR);
+        g.fillRect(bar_x, bar_y, hp_bar_width, bar_height);
+        
+        g.setColor(VALUE);
+        g.drawString(text, text_x, text_y);
+
+        // Display the player's damage and coolDown
+        text_x = cam.getMinX() + 200;
+        g.setColor(LABEL);
+        g.drawString("Damage:", text_x, text_y);
+        text_x += 80;
+        text = Integer.toString(player.getMaxDamage());               // TODO: Damage
+        g.setColor(VALUE);
+        g.drawString(text, text_x, text_y);
+        text_x += 40;
+        g.setColor(LABEL);
+        g.drawString("Rate:", text_x, text_y);
+        text_x += 55;
+        text = Integer.toString(player.getMaxCoolDown());                                    // TODO: Cooldown
+        g.setColor(VALUE);
+        g.drawString(text, text_x, text_y);
+
+        // Display the player's inventory
+        g.setColor(LABEL);
+        g.drawString("Items:", cam.getMinX() + 420, text_y);
+        bar_x = cam.getMinX() + 490;
+        bar_y = cam.getMinY() + Constant.screenheight - Constant.PANEL_HEIGHT + 10;
+        bar_width = 288;
+        bar_height = bar_height + 20;
+        g.setColor(BAR_BG);
+        g.fillRect(bar_x, bar_y, bar_width, bar_height);
+
+        inv_x = cam.getMinX() + 490;
+        
+        inv_y = cam.getMinY() + Constant.screenheight - Constant.PANEL_HEIGHT
+            + ((Constant.PANEL_HEIGHT  - 72) / 2);
+        if(player.getItems() != null)
+        {
+        	for(Item item : player.getItems())
+        	{
+        		item.setPos(33 + inv_x, 33 + inv_y);
+        		item.render(g);
+        		inv_x += 72;
+        	}
+        }
     }
 }
     

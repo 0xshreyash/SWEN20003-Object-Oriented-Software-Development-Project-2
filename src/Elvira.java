@@ -1,8 +1,7 @@
 
-import java.util.*;
 
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+
 
 /**
  * 
@@ -20,27 +19,32 @@ public class Elvira extends Villager implements Interactable
     		 Constant.ElviraSays, Constant.SHAMAN);
     }
     
-    public void action()
-    {
-    	String []Dialog = this.getDialog();
-    	
-    }
-
-    public Class<? extends Entity> getTag()
-    {
-    	return this.getClass();
-    	
-    }
-
-	
-	public void action(Interactable other)
+    @Override
+	public void action(Interactable other) 
 	{
-		if(this.isInteractor(other))
+		if(other.identify() == InteractorTag.Player && this.isTalking() == false)
 		{
-			
+			if(((Player)other).isTalking())
+			{
+				talkTo((Player)other);
+			}
 			
 		}
-			
 		
 	}
+    
+    public void talkTo(Player player)
+    {
+    	this.setTalk(true);
+    	
+    	if(player.getHP() == player.getMaxHP())
+    	{
+    		this.setCurrentlySaying(dialogAtIndex(0));
+    	}
+    	else
+    	{
+    		player.setHP(player.getMaxHP());
+    		this.setCurrentlySaying(dialogAtIndex(1));
+    	}
+    }
 }

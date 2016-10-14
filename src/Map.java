@@ -37,14 +37,14 @@ public class Map extends TiledMap
 	 */
 	public boolean blocks(float x, float y)
     {
-    	/* Finding which tile we check blocking for */
-    	int x_tile = (int)(x/this.getTileWidth()); 
-    	int y_tile = (int)(y/this.getTileHeight()); 
  
     	boolean isBlocking = false;
     	
     	/* Check and return if the tile is blocking. */
-    	int tileID = this.getTileId(x_tile, y_tile, 0); 
+    	int tileID = this.getTileId((int)x, (int)y, 0); 
+    	if(tileID == Constant.OUT_OF_BOUNDS)
+    		return true;
+    		
     	if(this.getTileProperty(tileID, "block", "0").equals("1"))
     	{
     		isBlocking = true; 
@@ -52,4 +52,18 @@ public class Map extends TiledMap
     	return isBlocking; 
     	
     }
+	
+	 @Override
+	 public int getTileId(int x,int y, int layerIndex) 
+	 {
+	        try 
+	        {
+	            return super.getTileId(x / this.getTileWidth(),
+	                    y / this.getTileHeight(), layerIndex);
+	        } 
+	        catch (ArrayIndexOutOfBoundsException e) 
+	        {
+	            return Constant.OUT_OF_BOUNDS;
+	        }
+	 }
 }

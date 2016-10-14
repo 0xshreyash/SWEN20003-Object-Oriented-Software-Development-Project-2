@@ -7,19 +7,19 @@ import org.newdawn.slick.geom.Vector2f;
 /**
  * 
  */
-public abstract class MonsterPassive extends Monster implements Interactable
+public class MonsterPassive extends Monster implements Interactable
 {
 	
 	private float timeAfterLastDirectionChange; 
 	
 	private Random rndm;
 	
+	/** Direction to move in */ 
 	private Vector2f moveIn;
 	
 	private boolean isPatrolling;
-	
-	
-	private boolean runAway;
+
+	private boolean isRunningAway;
 
     /**
      * Default constructor
@@ -33,12 +33,12 @@ public abstract class MonsterPassive extends Monster implements Interactable
     	rndm = new Random();
     	moveIn = getRandomDirection();
     	isPatrolling = true;
-    	runAway = false;
+    	isRunningAway = false;
     	timeAfterLastDirectionChange = 0;
     	
     }
 	
-	public InteractorTag identifier()
+	public InteractorTag identify()
     {
     	return InteractorTag.MonsterPassive;
     }
@@ -57,13 +57,16 @@ public abstract class MonsterPassive extends Monster implements Interactable
      */
     public void update(Map map, int delta) 
     {
+    	this.setDead();
+    	if(this.isDead())
+    		return;
         if(this.isUnderAttack())
         {
         	isPatrolling = false;
-        	// change isPatrolling when underAttack is made true. 
+        	isRunningAway = true;
         	this.moveAway(map, delta);
         }
-        else if(this.isPatrolling)
+        if(this.isPatrolling)
         {
         	timeAfterLastDirectionChange += delta; 
         	if(timeAfterLastDirectionChange >= Constant.TIME_TO_CHANGE_DIRECTION)
@@ -81,10 +84,23 @@ public abstract class MonsterPassive extends Monster implements Interactable
         	{
         		timeAfterLastDirectionChange = Constant.TIME_TO_CHANGE_DIRECTION;
         	}
+        	this.setDeltaSinceBeingAttacked(this.getDeltaSinceBeingAttacked() + delta);
         }
-        else if(runAway)
+        else if(isRunningAway)
         {
+        	timeAfterLastDirectionChange += delta; 
+        	if(timeAfterLastDirectionChange >= Constant.TIME_TO_CHANGE_DIRECTION)
+        	{
+        		
+        		
+        	}
+        	Vector2f moveTowards = moveIn.copy().scale(this.getSpeed()*delta);
+        	if(!map.blocks(this.getxPos() + moveTowards.getX(), this.getyPos() + moveTowards.getY()))
+        	{
+        		this.setPos(this.getPos().add(moveTowards));
+        	}
         	moveAway(map, delta);
+        	this.setDeltaSinceBeingAttacked(this.getDeltaSinceBeingAttacked() + delta);
         }
         			
         return;   
@@ -92,38 +108,85 @@ public abstract class MonsterPassive extends Monster implements Interactable
     
     public void moveAway(Map map, int delta)
     {
-    	runAway = true; 
+    	isRunningAway = true; 
     	this.setUnderAttack(false);
     	if(this.getDeltaSinceBeingAttacked() >= Constant.TIME_TO_SAFETY)
     	{
-    		runAway = false;
+    		isRunningAway = false;
     		isPatrolling = true;
-    		this.setDeltaSinceBeingAttacked(0);
+    		moveIn = getRandomDirection();
+    		timeAfterLastDirectionChange = 0;
     	}
     	else 
     	{
-    		Vector2f direction = getPos().sub(this.getAdversary().
-    				getPos()).getNormal();
-    		this.setDeltaSinceBeingAttacked(delta);
-    		Vector2f moveTowards = direction.copy().scale(this.getSpeed()*delta);
-    		if(!map.blocks(this.getxPos() + moveTowards.getX(), this.getyPos() + moveTowards.getY()))
+    		float distTotal = 0, dX, dY;
+	    	distTotal = (float) Math.sqrt((float)(Math.pow(((Player)this.getAdversary()).getxPos() - this.getxPos(), 2) 
+	    			+ Math.pow(((Player)this.getAdversary()).getyPos() - this.getyPos(), 2)));
+	    	dX = -((((Player)this.getAdversary()).getxPos() - this.getxPos())/distTotal) * delta * this.getSpeed();
+	    	dY = -((((Player)this.getAdversary()).getyPos() - this.getyPos())/distTotal) * delta * this.getSpeed();
+	    	if(Math.abs(dX) <= Constant.VERY_SMALL_DISTANCE)
+	    	{
+	    		Random rand = new Random();
+	    		this.setxPos(this.getxPos() + rand.nextInt((Constant.posDirection - Constant.negDirection) + 1) + Constant.negDirection);
+	    		
+	    	}
+	    	if(Math.abs(dY) <= Constant.VERY_SMALL_DISTANCE)
+	    	{
+	    		Random rand = new Random();
+	    		this.setyPos(this.getyPos() + rand.nextInt((Constant.posDirection - Constant.negDirection) + 1) + Constant.negDirection);
+	    		
+	    	}
+	    	else if(!map.blocks(this.getxPos() + dX, this.getyPos() +  dY))
     		{
-    			this.setPos((this.getPos().add(moveTowards)));
+    			this.setxPos(this.getxPos() + dX);	
+				this.setyPos(this.getyPos() + dY);
     		}
     		else
     		{
     			timeAfterLastDirectionChange = Constant.TIME_TO_CHANGE_DIRECTION;
     		}
     		this.setUnderAttack(false);
-    		runAway = true;		
+    		isRunningAway = true;		
     	}
+    	
+    	return;
     }
   
    
     public void action(Interactable other) 
     {
+    	if(other.identify() == InteractorTag.Player)
+    		this.setAdversary(other);
     	return;
     }
+
+	@Override
+	public boolean isWithinRange(Interactable other) 
+	{
+		// TODO Auto-generated method stub
+		return getDistance(other) <= Constant.COLLIDE_RANGE;
+	}
+
+	
+
+	@Override
+	public void update(Map map, float dir_x, float dir_y, int delta, int attack, int talk) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public boolean isSame(Object other) 
+	{
+		if(other == null || other.getClass() != this.getClass())
+		{
+			return false;
+		}
+		
+		return other == this;
+	}
+
+	
     
 
 }
