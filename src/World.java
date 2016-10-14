@@ -155,8 +155,8 @@ public class World
         return; 
     }
     
-    /*
-     * Checks for interactions between interactables and calls 
+    
+    /** Checks for interactions between interactables and calls 
      * action on them
      */
     public void interactions()

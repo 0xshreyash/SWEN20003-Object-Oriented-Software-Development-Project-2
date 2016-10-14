@@ -1,4 +1,10 @@
-// Add comments
+/* SWEN20003 Object Oriented Software Development 
+ * RPG Game Engine
+ * Author: <Shreyassh Patodia> <spatodia>
+ * Student Number : 767336
+ * Email: spatodia@student.unimelb.edu.au
+ */
+
 public abstract class Constant 
 {
 
@@ -144,7 +150,7 @@ public abstract class Constant
 	    public static final int BatDamage = 0;
 	    /** Cooldown for Bat */
 	    public static final int BatCooldown = 0;
-	    /** Cooldown for Zombie 8/
+	    /** Cooldown for Zombie */
 	    public static final int ZombieCooldown = 800;
 	    /** Cooldown for Bandit */
 	    public static final int BanditCooldown = 200;
@@ -179,10 +185,15 @@ public abstract class Constant
 	    public static final int min_Y = 0;
 	    
 	    /** Starting x-coordinate of the player */
-		public static final float player_starting_X = 738; 
+		public static final float player_starting_X = 756; 
 		
 		/** Starting y-coordinate of the player. */
-		public static final float player_starting_Y = 549; 
+		public static final float player_starting_Y = 684; 
+		
+		/** Respawn x-coordinarte of the player */
+		public static final float respawn_X = 738;
+		/** Respawn y-coordinate of the player */
+		public static final float respawn_Y = 549;
 	    
 		/** Path to assets */
 	    public static final String ASSETS = "/assets/";

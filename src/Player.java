@@ -129,7 +129,8 @@ public class Player extends Unit implements Interactable
 		
 		if(this.isDead())
 		{
-			this.setPos(Constant.player_starting_X, Constant.player_starting_Y);
+			/* Respawning courtesy Elvira */
+			this.setPos(Constant.respawn_X, Constant.respawn_Y);
 			this.setHP(this.getMaxHP());
 			this.setCoolDown(0);
 			this.setDead(false);

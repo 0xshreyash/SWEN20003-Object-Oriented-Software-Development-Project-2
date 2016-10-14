@@ -1,18 +1,21 @@
+/* SWEN20003 Object Oriented Software Development 
+ * RPG Game Engine
+ * Author: <Shreyassh Patodia> <spatodia>
+ * Student Number : 767336
+ * Email: spatodia@student.unimelb.edu.au
+ */
 
 import java.util.*; 
 
 import org.newdawn.slick.SlickException;
 
-/**
- * 
- */
+
 public class Inventory 
 {
 	/** List of items */
 	private ArrayList<Item> items;
 	
-    /**
-     * 
+    /** Creates an new array list to host the inventory
      */
     public Inventory() 
     {
@@ -28,34 +31,36 @@ public class Inventory
     	items.add(e);
     }
     
+    /** Method for taking away item 
+     * @param itemName is the name of the item
+     */
     public void takeAwayItem(String itemName)
     throws SlickException
     {
-    		Item toAdd = null; 
+    		Item toTake = null; 
 	    	if(itemName.equals(Constant.ELIXIR))
 	    	{
-	    		toAdd = new Elixir();
+	    		toTake = new Elixir();
 	    		
 	    	}
 	    	else if(itemName.equals(Constant.SWORD))
 	    	{
-	    		toAdd = new Sword();
+	    		toTake = new Sword();
 	    	}
 	    	else if(itemName.equals(Constant.TOME))
 	    	{
-	    		toAdd = new Tome();
+	    		toTake = new Tome();
 	    	}
 	    	else if(itemName.equals(Constant.AMULET))
 	    	{
-	    		toAdd = new Amulet();
+	    		toTake = new Amulet();
 	    	}
-	    	int index = items.indexOf(toAdd);
+	    	int index = items.indexOf(toTake);
 	    	if(index != -1)
 	    	{
-	    		items.get(index).setCollected(true);
-	    		items.remove(index);
-	    	}
-	    	
+	    		items.get(index).setCollected(false);
+	    		items.remove(index);	
+	    	}    	
     }
 
     /** 

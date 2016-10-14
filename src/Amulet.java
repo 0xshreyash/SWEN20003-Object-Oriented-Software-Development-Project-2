@@ -1,12 +1,14 @@
-
+/* SWEN20003 Object Oriented Software Development 
+ * RPG Game Engine
+ * Author: <Shreyassh Patodia> <spatodia>
+ * Student Number : 767336
+ * Email: spatodia@student.unimelb.edu.au
+ */
 
 
 import org.newdawn.slick.SlickException;
 
 
-/**
- * 
- */
 public class Amulet extends Item implements Interactable
 {
 	/**

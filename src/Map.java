@@ -52,7 +52,10 @@ public class Map extends TiledMap
     	return isBlocking; 
     	
     }
-	
+		
+	/**
+	 * Used to override the getTileId in 
+	 */
 	 @Override
 	 public int getTileId(int x,int y, int layerIndex) 
 	 {

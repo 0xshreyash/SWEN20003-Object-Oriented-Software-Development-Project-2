@@ -1,4 +1,9 @@
-// Add comments
+/* SWEN20003 Object Oriented Software Development 
+ * RPG Game Engine
+ * Author: <Shreyassh Patodia> <spatodia>
+ * Student Number : 767336
+ * Email: spatodia@student.unimelb.edu.au
+ */
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Vector2f;
@@ -7,6 +12,8 @@ import org.newdawn.slick.geom.Vector2f;
 public interface Interactable 
 {	
 
+	/** Define all the methods dicated by this interface
+	 */
 	float collideRange = Constant.COLLIDE_RANGE;
     enum InteractorTag {Player, MonsterAggressive, MonsterPassive, Item, Villager};
     

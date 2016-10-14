@@ -1,4 +1,10 @@
- 
+/* SWEN20003 Object Oriented Software Development 
+ * RPG Game Engine
+ * Author: <Shreyassh Patodia> <spatodia>
+ * Student Number : 767336
+ * Email: spatodia@student.unimelb.edu.au
+ */
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
@@ -98,7 +104,6 @@ public abstract  class Monster extends Unit implements Interactable
     		this.getImageInverted().drawCentered(this.getxPos(), this.getyPos());
     		renderHealthBar(g);
     	}
-    
     
     }
 	

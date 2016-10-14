@@ -1,11 +1,13 @@
-
+/* SWEN20003 Object Oriented Software Development 
+ * RPG Game Engine
+ * Author: <Shreyassh Patodia> <spatodia>
+ * Student Number : 767336
+ * Email: spatodia@student.unimelb.edu.au
+ */
 
 import org.newdawn.slick.SlickException;
 
 
-/**
- * 
- */
 public class Elvira extends Villager implements Interactable
 {
 
@@ -19,11 +21,13 @@ public class Elvira extends Villager implements Interactable
     		 Constant.ElviraSays, Constant.SHAMAN);
     }
     
-    @Override
+    
     /** Action of Elvira, which is just dialogue
      */
+    @Override
 	public void action(Interactable other) 
 	{
+    		/* Identify if it is the player */
 		if(other.identify() == InteractorTag.Player && this.isTalking() == false)
 		{
 			if(((Player)other).isTalking())
@@ -40,16 +44,16 @@ public class Elvira extends Villager implements Interactable
      */
     public void talkTo(Player player)
     {
-    	this.setTalk(true);
-    	
-    	if(player.getHP() == player.getMaxHP())
-    	{
-    		this.setCurrentlySaying(dialogAtIndex(0));
-    	}
-    	else
-    	{
-    		player.setHP(player.getMaxHP());
-    		this.setCurrentlySaying(dialogAtIndex(1));
-    	}
+	    	this.setTalk(true);
+	    	
+	    	if(player.getHP() == player.getMaxHP())
+	    	{
+	    		this.setCurrentlySaying(dialogAtIndex(0));
+	    	}
+	    	else
+	    	{
+	    		player.setHP(player.getMaxHP());
+	    		this.setCurrentlySaying(dialogAtIndex(1));
+	    	}
     }
 }

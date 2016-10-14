@@ -1,9 +1,16 @@
+/* SWEN20003 Object Oriented Software Development 
+ * RPG Game Engine
+ * Author: <Shreyassh Patodia> <spatodia>
+ * Student Number : 767336
+ * Email: spatodia@student.unimelb.edu.au
+ */
+
 
 import org.newdawn.slick.SlickException;
 
 
 /**
- * 
+ * Garth is a villager that implements a 
  */
 public class Garth extends Villager implements Interactable
 {
@@ -18,9 +25,11 @@ public class Garth extends Villager implements Interactable
     		 Constant.GarthSays, Constant.PEASANT);
     }
     
-    @Override
-    /** Identifying  the action of this interactable
+    /** 
+     * Choosing how to act on the other Interactable
+     * @param other object of type Interactable
      */
+    @Override
 	public void action(Interactable other) 
 	{
 		if(other.identify() == InteractorTag.Player && this.isTalking() == false)

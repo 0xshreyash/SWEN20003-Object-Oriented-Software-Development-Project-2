@@ -1,4 +1,9 @@
-
+/* SWEN20003 Object Oriented Software Development 
+ * RPG Game Engine
+ * Author: <Shreyassh Patodia> <spatodia>
+ * Student Number : 767336
+ * Email: spatodia@student.unimelb.edu.au
+ */
 
 import org.newdawn.slick.SlickException;
 
@@ -19,6 +24,8 @@ public class PrinceAldric extends Villager implements Interactable
     }
     
     @Override
+    /** Defining the action of the prince respect to another interactable
+     */
 	public void action(Interactable other) 
 	{
 		if(other.identify() == InteractorTag.Player && this.isTalking() == false)
@@ -32,6 +39,9 @@ public class PrinceAldric extends Villager implements Interactable
 		
 	}
     
+    /** Talks to player and decides which dialogue to say
+     * @param player
+     */
     public void talkTo(Player player)
     {
     	this.setTalk(true);
@@ -46,6 +56,7 @@ public class PrinceAldric extends Villager implements Interactable
     		try 
     		{
 				player.takeAwayItem(Constant.ELIXIR);
+				
 			} 
     		catch (SlickException e) 
     		{
