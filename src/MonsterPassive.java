@@ -84,6 +84,7 @@ public class MonsterPassive extends Monster implements Interactable
         	{
         		timeAfterLastDirectionChange = Constant.TIME_TO_CHANGE_DIRECTION;
         	}
+        	
         	this.setDeltaSinceBeingAttacked(this.getDeltaSinceBeingAttacked() + delta);
         }
         else if(isRunningAway)

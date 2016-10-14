@@ -1,4 +1,4 @@
-/* SWEN20003 Object Oriented Software Development 
+/* SWEN20003 Object Oriented Software Development  
  * RPG Game Engine
  * Author: <Shreyash Patodia> <spatodia>
  * Student Number : 767336.
@@ -26,7 +26,7 @@ public class World
 	
 
 
-	
+	/** List of interactables */
 	private ArrayList<Interactable> interactables;
 	
 	/** The number of extra tiles we need in each direction */
@@ -60,19 +60,21 @@ public class World
     			cam.followUnit((Player)in);
     			player = (Player)in;
     		}
-    	}
-    	
-    	
-    	
-    	
+    	}	
     }
     
+    /**
+     * Initializes the interactables
+     * @throws SlickException
+     */
     public void setUpInteractables()
     throws SlickException
     {
     	Player pl = new Player();
     	interactables.add(pl); 
     	int i;
+    	
+    	/* Passive Monsters */
     	for(i = 0; i < Constant.NumberOfBats; i++)
     	{
     	
@@ -82,6 +84,7 @@ public class World
     	int totalAggressive = Constant.NumberOfBandits + Constant.NumberOfDraelic
     			+ Constant.NumberOfSkeleton + Constant.NumberOfZombies;
     	
+    	/* Aggressive Monsters */
     	for(i = 0; i < totalAggressive; i++)
     	{
     		if(i < Constant.NumberOfZombies)
@@ -108,12 +111,15 @@ public class World
     			//break;
 
     		}
+    		
     	}
     	
+    	/* Villagers */
     	interactables.add(new PrinceAldric());
     	interactables.add(new Elvira());
     	interactables.add(new Garth());
     	
+    	/* Items */
     	interactables.add(new Amulet());
     	interactables.add(new Sword());
     	interactables.add(new Tome());
@@ -131,20 +137,31 @@ public class World
     public void update(int dir_x, int dir_y, int delta, int attack, int talk)
     throws SlickException
     {
+    	/* Update all interactables except player */
     	for(Interactable in : interactables)
     	{
     		if(!(in.identify() == Interactable.InteractorTag.Player))
     			in.update(map, delta);
     	}
-    	interactions();
+    	/* Update player */
     	player.update(map, dir_x, dir_y, delta, attack, talk);
+    	
+    	/* Check for interactions */
+    	interactions();
+    	
+    	/* Update camera */
         cam.update();
        
         return; 
     }
     
+    /*
+     * Checks for interactions between interactables and calls 
+     * action on them
+     */
     public void interactions()
     {
+    	/* Check for null */
     	if(interactables == null)
     		return;
    
@@ -158,12 +175,14 @@ public class World
     	    		 continue;
     	    	 }
     	    	 
+    	    	 /* Don't interact if they are of the same type */
                 if (other.identify() != in.identify() &&
 	                       in.isWithinRange(other))
                 {
                 	
 	                    in.action(other);
                 }
+                
     	     }
     	 	
     	}
@@ -202,6 +221,8 @@ public class World
     }
     
     /**
+     * THIS CODE WAS NOT WRITTEN BY SHREYASH PATODIA, IT WAS PROVIDED TO 
+     * US. 
      * Renders the player's status panel. (taken as-is from renderpanel.txt with only minor changes)
      *
      * @param g The current Slick graphics context.
@@ -242,8 +263,6 @@ public class World
         hp_bar_width = (bar_width * health_percent);
         text_x = bar_x + (bar_width - g.getFont().getWidth(text)) / 2;
         
-        
-        
         g.setColor(BAR_BG);
         g.fillRect(bar_x, bar_y, bar_width, bar_height);
         
@@ -269,7 +288,7 @@ public class World
         g.setColor(VALUE);
         g.drawString(text, text_x, text_y);
 
-        // Display the player's inventory
+        /*Display the player's inventory*/
         g.setColor(LABEL);
         g.drawString("Items:", cam.getMinX() + 420, text_y);
         bar_x = cam.getMinX() + 490;
@@ -280,13 +299,13 @@ public class World
         g.fillRect(bar_x, bar_y, bar_width, bar_height);
 
         inv_x = cam.getMinX() + 490;
-        
         inv_y = cam.getMinY() + Constant.screenheight - Constant.PANEL_HEIGHT
             + ((Constant.PANEL_HEIGHT  - 72) / 2);
         if(player.getItems() != null)
         {
         	for(Item item : player.getItems())
         	{
+        		System.out.print("Rendering item");
         		item.setPos(33 + inv_x, 33 + inv_y);
         		item.render(g);
         		inv_x += 72;

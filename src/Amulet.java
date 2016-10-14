@@ -10,7 +10,7 @@ import org.newdawn.slick.SlickException;
 public class Amulet extends Item implements Interactable
 {
 	/**
-     * 
+     * The HP boost to the player
      */
     private int hpBoost;
 
@@ -24,12 +24,18 @@ public class Amulet extends Item implements Interactable
     	hpBoost = Constant.AMULET_BOOST;
     }
 
-    public void action(Interactable other) 
+    
+    /**
+     * Add item to the player's inventory
+     * @param other - the Interactable that the item is interacting with
+     */
+    public void action(Interactable other)
+ 
     {
         if(other.identify() == InteractorTag.Player)
         {
         	
-        	((Player)other).takeItem(this);
+        	((Player)other).getInv().addItem(this);
         	((Player)other).setMaxHP(((Player)other).getMaxHP() + hpBoost);
         	((Player)other).setHP(((Player)other).getHP() + hpBoost);
         	

@@ -17,13 +17,18 @@ import org.newdawn.slick.SlickException;
 public class Player extends Unit implements Interactable
 {
 
+	/** Image of the panel for the player */
 	private Image panel;
 	
+	/** true if the Player is attacking */
 	private int attacking;
 	
+	/** true if the Player is talking */
 	private int talking;
 	
+	/** Inventory of the player */
 	private Inventory inv; 
+	
     /** Creates the player object.  
      * @param playerImagePath - the path to the file containing the image
      * of the player.
@@ -42,8 +47,15 @@ public class Player extends Unit implements Interactable
 		
 	}
 	
+	/**
+	 * Return inventory as an ArrayList
+	 * @return inv - ArrayList
+	 */
+	public Inventory getInv() 
+	{
+		return inv;
+	}
 
-	
 	/** Updates the position of the player in order to render it.
 	 * @param map - The Map object we use to see if the tile is
 	 * blocking or not. 
@@ -124,43 +136,76 @@ public class Player extends Unit implements Interactable
 		}
 	}
 	
-	
+	/**
+	 * true if the player is talking 
+	 * @return isTalking - boolean
+	 */
 	public boolean isTalking()
 	{
 		return (talking==1)?true:false;
 	}
 	
+	/** 
+	 * true if the player is attacking
+	 * @return isAttacking - boolean
+	 */
 	public boolean isAttacking()
 	{
 		return (attacking==1)?true:false;
 	}
 	
+	/**
+	 * returns the items in the inventory of the player
+	 * @return ArrayList of items that player has collected
+	 */
 	public ArrayList<Item> getItems() 
 	{
 	        return inv.getItems();
 	}
 
+	/**
+	 * true if the player has the proposed item
+	 * @param itemName - the item we want to check if the player
+	 * has
+	 * @return true if the player has the item
+	 */
     public boolean hasItem(String itemName) 
     {
         for (Item trialItem : this.getItems())
         {
-            if (trialItem.equals(itemName))
+            if (trialItem.getItemName().equals(itemName))
             	return true;
         }
         return false;
     }
 
-    public void takeItem(String itemName) 
+    /** 
+     * take item away from player 
+     * @param itemName - item to be taken away
+     * @throws SlickException
+     */
+    public void takeAwayItem(String itemName) 
     throws SlickException 
     {
-        inv.takeItem(itemName);
+        inv.takeAwayItem(itemName);
     }
-
+    
+    /**
+     * alias for take item
+     * @param item - the item we want to take away
+     * @throws SlickException
+     */
     public void takeItem(Item item) 
+    throws SlickException
     {
-        inv.addItem(item);
+        inv.takeAwayItem(item.getItemName());
     }
-
+    
+    /**
+     * Checks if other Interactable is within range 
+     * of collision
+     * @return true if other is within range.
+     */
 	@Override
 	public boolean isWithinRange(Interactable other) 
 	{
@@ -168,19 +213,30 @@ public class Player extends Unit implements Interactable
 		return getDistance(other) <= collideRange;
 	}
 
+	/**
+	 * Check if other is the same as this object
+	 * @return true if the other is the same as this
+	 */
 	@Override
 	public boolean isSame(Object other) 
 	{
-		return false;
+		return this == other;
 	}
 
+	/** 
+	 * Update so that class successfully implements the interface
+	 */
 	@Override
 	public void update(Map map, int delta) 
 	{
 		return;
 		
 	}
-
+	
+	/**
+	 * @param g - Slick graphics container g
+	 * @return void
+	 */
 	@Override
 	public void render(Graphics g) 
 	{
@@ -199,6 +255,10 @@ public class Player extends Unit implements Interactable
 		return;
 	}
 	
+	/**
+	 * Take action on the other interactable
+	 * @param other Interactable
+	 */
 	@Override
 	public void action(Interactable other)
 	{
@@ -212,7 +272,7 @@ public class Player extends Unit implements Interactable
 				((Unit)other).setHP(((Unit)other).getHP() - 
 						(int)(damage));
 				System.out.println("Attacked with damage:" + damage + " " + ((Unit)other).getHP());
-				
+				/* Make player adversary of the monster */
 				((Monster)other).setAdversary(this);
 				((Monster)other).setUnderAttack(true);
 				((Monster)other).setDeltaSinceBeingAttacked(0);
@@ -224,6 +284,10 @@ public class Player extends Unit implements Interactable
 			
 	}
 
+	/**
+	 * Check if the player is  dead 
+	 * @return false if player is dead 
+	 */
 	@Override
 	public boolean isActive() 
 	{
@@ -231,11 +295,19 @@ public class Player extends Unit implements Interactable
 		return true;
 	}
 	
+	/**
+	 * Returns the panel
+	 * @return the panel of the player
+	 */
 	public Image getPlayerPanel()
 	{
 		return this.panel;
 	}
-
+	
+	/**
+	 * Returns the tag of the Player
+	 * @return the InteractorTag
+	 */
 	@Override
 	public InteractorTag identify() {
 		

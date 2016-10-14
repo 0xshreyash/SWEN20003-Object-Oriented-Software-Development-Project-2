@@ -49,11 +49,7 @@ public abstract class Item extends Entity implements Interactable
 	}
 	
 	
-	@Override
-	public void action(Interactable other) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public boolean isWithinRange(Interactable other) 

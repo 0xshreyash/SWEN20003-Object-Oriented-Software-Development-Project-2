@@ -31,7 +31,8 @@ public class Elixir extends Item implements Interactable
     {
         if(other.identify() == InteractorTag.Player)
         {
-        	((Player)other).takeItem(this);
+        	((Player)other).getInv().addItem(this);
+        
         	
         }
     }

@@ -19,6 +19,8 @@ public class Garth extends Villager implements Interactable
     }
     
     @Override
+    /** Identifying  the action of this interactable
+     */
 	public void action(Interactable other) 
 	{
 		if(other.identify() == InteractorTag.Player && this.isTalking() == false)
@@ -32,6 +34,9 @@ public class Garth extends Villager implements Interactable
 		
 	}
     
+    /** Just sets up the dialogue for Garth depending on what the player has in the inventory
+     * @param player is the current player object
+     */
     public void talkTo(Player player)
     {
     	this.setTalk(true);

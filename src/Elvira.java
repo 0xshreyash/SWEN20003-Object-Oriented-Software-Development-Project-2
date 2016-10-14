@@ -20,6 +20,8 @@ public class Elvira extends Villager implements Interactable
     }
     
     @Override
+    /** Action of Elvira, which is just dialogue
+     */
 	public void action(Interactable other) 
 	{
 		if(other.identify() == InteractorTag.Player && this.isTalking() == false)
@@ -33,6 +35,9 @@ public class Elvira extends Villager implements Interactable
 		
 	}
     
+    /** This method sets the HP of the player to full after the player talks to Elvira
+     * @param player is the player object
+     */
     public void talkTo(Player player)
     {
     	this.setTalk(true);

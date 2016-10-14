@@ -96,7 +96,7 @@ public abstract class Villager extends Unit implements Interactable
 	}
 
 	@Override
-	/**
+	/** Checks if two interactables are same or not
 	 */
 	public boolean isSame(Object other) 
 	{
@@ -131,7 +131,6 @@ public abstract class Villager extends Unit implements Interactable
 		{
 			speechDuration = speechDuration + delta;
 		}
-		
 	}
 
 	@Override
@@ -151,27 +150,41 @@ public abstract class Villager extends Unit implements Interactable
 	}
 
 	@Override
+	/** Checks whether a unit is dead not
+	 */
 	public boolean isActive() 
 	{
 		return this.getHP() >= 0;
 	}
 
 	@Override
+	/** Returns the ID of the interactable
+	 */
 	public InteractorTag identify() 
 	{
 		return InteractorTag.Villager;
 	}
 	
+	/** Getting the distance between the player and an interactable
+	 * @param other an interactable
+	 * @return distance of the player from the interactable
+	 */
 	private float getDistance(Interactable other)
 	{
         return (float)Math.sqrt(getPos().distanceSquared(other.getPos()));
     }
 	
+	/** This renders the speech of the villager
+	 * @param g the slick graphics container
+	 */
 	private void renderSpeech(Graphics g) 
 	{
+		//Setting the colours
         Color VALUE = new Color(1.0f, 1.0f, 1.0f);          // White
         Color BAR_BG = new Color(0.0f, 0.0f, 0.0f, 0.3f);   // Black, transp
 
+        
+        //setting the bar dimensions
         float dialogXOffset = g.getFont().getWidth(currentlySaying);
         dialogXOffset =  -dialogXOffset/2;
 
@@ -181,7 +194,9 @@ public abstract class Villager extends Unit implements Interactable
 
         int barWidth = Math.max(g.getFont().getWidth(currentlySaying) + Constant.ADD_TO_FONT_WIDTH, Constant.BAR_Y_OFFSET);
         int barHeight = Constant.BAR_HEIGHT;
-
+        
+        
+        //filling the bar in with what is currently being said by the character
         g.setColor(BAR_BG);
         g.fillRect(x, y, barWidth, barHeight);
 
@@ -198,6 +213,8 @@ public abstract class Villager extends Unit implements Interactable
    
     }
 	
+	/** Updating the map with the new state of the world
+	 */
 	public void update(Map map, float dir_x, float dir_y, int delta, int attack, int talk) 
 	{
 		

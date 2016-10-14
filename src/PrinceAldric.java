@@ -43,6 +43,15 @@ public class PrinceAldric extends Villager implements Interactable
     	else
     	{
     		this.setCurrentlySaying(dialogAtIndex(1));
+    		try 
+    		{
+				player.takeAwayItem(Constant.ELIXIR);
+			} 
+    		catch (SlickException e) 
+    		{
+				
+				e.printStackTrace();
+			}
     	}
     }
     
