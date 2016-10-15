@@ -11,6 +11,7 @@
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
+/** Entity class as a general purpose class */
 public abstract class Entity
 {
 	/**************** Attributes *********************/

@@ -8,7 +8,7 @@
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Vector2f;
 
-
+/** Interface implemented by everything that can interact with one another */
 public interface Interactable 
 {	
 

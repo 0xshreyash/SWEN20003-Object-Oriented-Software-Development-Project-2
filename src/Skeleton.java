@@ -8,7 +8,7 @@
 import org.newdawn.slick.SlickException;
 
 /**
- * Skeleton that inerits from MonsterAggressive
+ * Skeleton that inehrits from MonsterAggressive
  */
 public class Skeleton extends MonsterAggressive 
 {

@@ -6,6 +6,7 @@
  */
 import org.newdawn.slick.SlickException;
 
+/** Class for passive giant bats */
 public class GiantBat extends MonsterPassive
 {
 

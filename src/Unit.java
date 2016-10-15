@@ -13,7 +13,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-
+/** Is a class for everything that is analogus to a 
+ * character in our game. 
+ * @author ShreyashPatodia
+ *
+ */
 public abstract class Unit extends Entity
 {
 	/** Let us define the instance variables for this class

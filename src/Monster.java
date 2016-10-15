@@ -8,7 +8,7 @@
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-
+/** Monster class for the bad guys in the game */
 public abstract  class Monster extends Unit implements Interactable
 {
 	/** Setting the instance variable of this calls first

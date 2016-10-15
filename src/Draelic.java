@@ -8,7 +8,7 @@
 import org.newdawn.slick.SlickException;
 
 /**
- * 
+ * Class for Draelic Nacromancer
  */
 public class Draelic extends MonsterAggressive {
 

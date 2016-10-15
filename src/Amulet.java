@@ -1,4 +1,4 @@
-/* SWEN20003 Object Oriented Software Development 
+/* SWEN20003 Object Oriented Software Development  
  * RPG Game Engine
  * Author: <Shreyassh Patodia> <spatodia>
  * Student Number : 767336
@@ -8,7 +8,7 @@
 
 import org.newdawn.slick.SlickException;
 
-
+/** Class for Amulets */
 public class Amulet extends Item implements Interactable
 {
 	/**

@@ -11,7 +11,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
- * 
+ * Class for Passive monsters that look scary but are tame and easily
+ * killable
  */
 public class MonsterPassive extends Monster implements Interactable
 {

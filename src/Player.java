@@ -14,6 +14,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+/** Player class, the class that we can control */
 public class Player extends Unit implements Interactable
 {
 

@@ -10,7 +10,7 @@ import org.newdawn.slick.SlickException;
 
 
 /**
- * Garth is a villager that implements a 
+ * Garth is a villager that implements actions
  */
 public class Garth extends Villager implements Interactable
 {

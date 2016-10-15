@@ -56,7 +56,7 @@ public class World
     	{
     		if(in.identify() == Interactable.InteractorTag.Player)
     		{
-    			System.out.println("There is a player");
+    			
     			cam.followUnit((Player)in);
     			player = (Player)in;
     		}
@@ -305,7 +305,7 @@ public class World
         {
         	for(Item item : player.getItems())
         	{
-        		System.out.print("Rendering item");
+       
         		item.setPos(33 + inv_x, 33 + inv_y);
         		item.render(g);
         		inv_x += 72;

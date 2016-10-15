@@ -9,7 +9,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Image;
 
- 
+ /** Collectables in the game */
 public abstract class Item extends Entity implements Interactable
 {
 	/** Defining the instance variable used this  class

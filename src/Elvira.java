@@ -7,7 +7,7 @@
 
 import org.newdawn.slick.SlickException;
 
-
+/** Shaman Elvira's class */
 public class Elvira extends Villager implements Interactable
 {
 

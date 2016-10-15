@@ -8,7 +8,7 @@
 import org.newdawn.slick.SlickException;
 
 /**
- * 
+ * Tome is a class for a speel book
  */
 public class Tome extends Item implements Interactable
 {

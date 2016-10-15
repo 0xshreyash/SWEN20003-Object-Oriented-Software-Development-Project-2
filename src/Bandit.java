@@ -7,7 +7,7 @@
 
 import org.newdawn.slick.SlickException;
 
-
+/** Class for Bandits */
 public class Bandit extends MonsterAggressive {
 
     /**

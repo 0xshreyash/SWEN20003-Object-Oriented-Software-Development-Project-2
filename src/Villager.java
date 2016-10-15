@@ -10,6 +10,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+/** Villagers are the NPC in the game */
 public abstract class Villager extends Unit implements Interactable
 {
 	/** Setting the class variables

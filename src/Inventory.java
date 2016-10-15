@@ -9,7 +9,7 @@ import java.util.*;
 
 import org.newdawn.slick.SlickException;
 
-
+/** Inventory for the Player */
 public class Inventory 
 {
 	/** List of items */
@@ -37,30 +37,12 @@ public class Inventory
     public void takeAwayItem(String itemName)
     throws SlickException
     {
-    		Item toTake = null; 
-	    	if(itemName.equals(Constant.ELIXIR))
-	    	{
-	    		toTake = new Elixir();
-	    		
-	    	}
-	    	else if(itemName.equals(Constant.SWORD))
-	    	{
-	    		toTake = new Sword();
-	    	}
-	    	else if(itemName.equals(Constant.TOME))
-	    	{
-	    		toTake = new Tome();
-	    	}
-	    	else if(itemName.equals(Constant.AMULET))
-	    	{
-	    		toTake = new Amulet();
-	    	}
-	    	int index = items.indexOf(toTake);
-	    	if(index != -1)
-	    	{
-	    		items.get(index).setCollected(false);
-	    		items.remove(index);	
-	    	}    	
+    		for(Item item : items)
+		    	if(item.getItemName().equals(itemName))
+		    	{
+		    		item.setCollected(true);
+		    		
+		    	}
     }
 
     /** 

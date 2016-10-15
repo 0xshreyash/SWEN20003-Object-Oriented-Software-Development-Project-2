@@ -5,6 +5,7 @@
  * Email: spatodia@student.unimelb.edu.au
  */
 
+/** Class with all the constant variables */
 public abstract class Constant 
 {
 
@@ -246,7 +247,7 @@ public abstract class Constant
 	    public static final int PlayerHP = 100; 
 	    
 	    /** Max. Damage by player */
-	    public static final int PlayerDamage = 2600; 
+	    public static final int PlayerDamage = 26; 
 	    /** Time for player to attack again */
 	    public static final int PlayerCooldown = 600;
 	    

@@ -8,7 +8,7 @@
 import org.newdawn.slick.SlickException;
 
 /**
- * 
+ * PrinceAldric class
  */
 public class PrinceAldric extends Villager implements Interactable
 {

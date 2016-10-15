@@ -9,7 +9,7 @@ import org.newdawn.slick.SlickException;
 
 
 /**
- * 
+ * Sword is a collectable that increase attack damage
  */
 public class Sword extends Item implements Interactable
 {

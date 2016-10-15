@@ -8,10 +8,9 @@
 
 import org.newdawn.slick.SlickException;
 
-
+/** Elixier class to save the king */
 public class Elixir extends Item implements Interactable
 {
-
     /**
      * Default constructor
      */
@@ -22,7 +21,9 @@ public class Elixir extends Item implements Interactable
     	
     }
 
-    /** Decides how to add depending on the ID of other
+    
+
+	/** Decides how to add depending on the ID of other
      * @param other the object's ID that needs to be checked
      * @return void 
      */
@@ -34,5 +35,9 @@ public class Elixir extends Item implements Interactable
         	
         }
     }
+    
+  
+    
+   
 
 }
