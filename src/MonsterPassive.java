@@ -199,7 +199,7 @@ public class MonsterPassive extends Monster implements Interactable
 	 */
 	public boolean isWithinRange(Interactable other) 
 	{
-		// TODO Auto-generated method stub
+		
 		return getDistance(other) <= Constant.COLLIDE_RANGE;
 	}
 
@@ -210,7 +210,6 @@ public class MonsterPassive extends Monster implements Interactable
 	 */
 	public void update(Map map, float dir_x, float dir_y, int delta, int attack, int talk) 
 	{
-		// TODO Auto-generated method stub
 		
 	}
 	
